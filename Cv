@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amin Saadati - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #222;
+            background: #f0f0f0;
+            padding: 25px;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px 45px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* DOWNLOAD BUTTON */
+        .download-wrapper {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            z-index: 100;
+        }
+        .download-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(26,115,232,0.3);
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #1557b0;
+        }
+        .download-menu {
+            display: none;
+            position: absolute;
+            top: 42px;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            min-width: 160px;
+            overflow: hidden;
+        }
+        .download-menu.show {
+            display: block;
+        }
+        .download-menu button {
+            width: 100%;
+            padding: 11px 16px;
+            border: none;
+            background: white;
+            text-align: left;
+            font-size: 13.5px;
+            cursor: pointer;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .download-menu button:hover {
+            background: #f1f5f9;
+        }
+        .download-menu button:not(:last-child) {
+            border-bottom: 1px solid #eee;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #222;
+            padding-right: 130px;
+        }
+        .header-left {
+            width: 32%;
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+        .header-center {
+            width: 36%;
+            text-align: center;
+            padding-top: 2px;
+        }
+        .header-right {
+            width: 32%;
+            text-align: right;
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+        .name {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        .header a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        /* SECTIONS */
+        h2 {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #111;
+            border-bottom: 1.5px solid #999;
+            padding-bottom: 3px;
+            margin: 22px 0 9px 0;
+        }
+        ul {
+            margin-left: 18px;
+            margin-bottom: 4px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        .job-title {
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 1px;
+        }
+        .job-date {
+            font-style: italic;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .section-content {
+            margin-bottom: 4px;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 15px 25px; }
+            .download-wrapper { display: none !important; }
+            .header { padding-right: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="cv-content">
+
+        <!-- DOWNLOAD BUTTON -->
+        <div class="download-wrapper">
+            <button class="download-btn" onclick="toggleMenu()">
+                ⬇ Download
+            </button>
+            <div class="download-menu" id="downloadMenu">
+                <button onclick="downloadAs('pdf')">📄 PDF</button>
+                <button onclick="downloadAs('word')">📝 Word (.docx)</button>
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                Mashhad, Iran<br>
+                Cell: +98 999 971 8581<br>
+                <a href="https://aminsaadatiit.github.io/portfolio/" target="_blank" rel="noopener">Homepage</a><br>
+                <a href="https://github.com/AminSaadatiIT" target="_blank" rel="noopener">GitHub</a>
+            </div>
+
+            <div class="header-center">
+                <div class="name">Amin<br>Saadati</div>
+            </div>
+
+            <div class="header-right">
+                <a href="https://www.linkedin.com/in/amin-saadati-it/" target="_blank" rel="noopener">LinkedIn</a><br>
+                <a href="mailto:amin.saadati5195@gmail.com">amin.saadati5195@gmail.com</a>
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <h2>Education</h2>
+        <div class="section-content">
+            <strong>Bachelor’s Degree in Network Specialist</strong>, Islamic Azad University, Iran<br>
+            <span class="job-date">Mehr 1401 (September 2022) – Present (Last semester – Fall term)</span>
+        </div>
+
+        <!-- RESEARCH INTERESTS -->
+        <h2>Research Interests</h2>
+        <ul>
+            <li>Network Security & High Redundancy WAN Connectivity</li>
+            <li>VLANs, Active Directory, VMware, Hyper-V</li>
+            <li>Help Desk & IT Support</li>
+            <li>Event Preparation & Conference Organization</li>
+            <li>System Administration (Windows Server, IIS)</li>
+            <li>Cloud Storage & Data Management</li>
+        </ul>
+
+        <!-- PUBLICATIONS -->
+        <h2>Publications</h2>
+        <div class="section-content">
+            (Empty – will be added later)
+        </div>
+
+        <!-- POSTERS & PRESENTATIONS -->
+        <h2>Posters & Presentations</h2>
+        <ul>
+            <li><strong>Course Project Presentation</strong> – Cloud Storage Technologies and Applications in Data Storage (Classroom presentation)</li>
+        </ul>
+
+        <!-- HONORS & AWARDS -->
+        <h2>Honors & Awards</h2>
+        <div class="section-content">
+            None
+        </div>
+
+        <!-- SKILLS -->
+        <h2>Skills</h2>
+        <div class="section-content">
+            <strong>Technical Skills:</strong>
+            <ul>
+                <li><strong>Programming:</strong> Python (Junior), C++ (Mid-level), SQL (Junior), Arduino (Junior)</li>
+                <li><strong>Software:</strong> Active Directory, Windows Server, IIS, VMware, Hyper-V, All Windows tools, Help Desk, Printer & Hardware Maintenance, Network Troubleshooting</li>
+                <li><strong>Online Platforms:</strong> GitHub, Personal Portfolio</li>
+            </ul>
+            <strong>Soft Skills:</strong>
+            <ul>
+                <li><strong>Presentation:</strong> Strong professional and classroom presentations</li>
+                <li><strong>Documentation:</strong> Clear and comprehensive technical reports</li>
+                <li><strong>Teamwork:</strong> Managed over 150 staff members with a team of only 3 people</li>
+            </ul>
+        </div>
+
+        <!-- WORK EXPERIENCE -->
+        <h2>Work Experience</h2>
+
+        <div class="job-title">Network Specialist @ Negin Razz Khurasan (Diplomat Hotel)</div>
+        <div class="job-date">February 2024 – Present | Khorasan Razavi, Iran</div>
+        <ul>
+            <li>Handled support for over 150 employees with only 3 people in the IT team</li>
+            <li>Full IT support: Troubleshooting, User Support, Printer Support, Hardware Maintenance</li>
+            <li>CCTV installation, configuration and maintenance</li>
+            <li>Daily Help Desk services</li>
+            <li>Preparation and technical support for conferences, ceremonies and organizational events</li>
+        </ul>
+
+        <div class="job-title">Digital Marketer @ Haghighi Rojaneh Tos</div>
+        <div class="job-date">8-month Internship (ended \~2 months before university start)</div>
+        <ul>
+            <li>Main focus on website SEO and digital marketing</li>
+            <li>Executed digital campaigns and website optimization</li>
+        </ul>
+
+        <!-- COURSES & CERTIFICATES -->
+        <h2>Courses & Certificates</h2>
+        <ul>
+            <li>
+                <strong>Advanced English</strong> — Iran Language Institute (Adults’ Department)<br>
+                Rating: <strong>Outstanding</strong><br>
+                <a href="#" onclick="alert('Upload the certificate image to this repository and update this link.'); return false;" style="color:#0066cc;">View Certificate</a>
+            </li>
+            <li><strong>IT Support & Help Desk</strong> — Maktabkhooneh</li>
+            <li><strong>IELTS Preparation</strong> — Currently in progress (B2 level)</li>
+            <li><strong>Duolingo English</strong> — Currently learning (no certificate yet)</li>
+        </ul>
+
+        <!-- REFERENCES -->
+        <h2>References</h2>
+        <ul>
+            <li>
+                <strong>Dr. Mahdi Zolfaghari</strong><br>
+                Director, Iran Language Institute
+            </li>
+            <li>
+                <strong>Dr. Asgari</strong><br>
+                Faculty Member, Islamic Azad University
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.umd.min.js"></script>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('downloadMenu').classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            const wrapper = document.querySelector('.download-wrapper');
+            if (!wrapper.contains(e.target)) {
+                document.getElementById('downloadMenu').classList.remove('show');
+            }
+        });
+
+        function downloadAs(type) {
+            document.getElementById('downloadMenu').classList.remove('show');
+            if (type === 'pdf') downloadPDF();
+            else if (type === 'word') downloadWord();
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('cv-content');
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Amin_Saadati_CV.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            const btn = document.querySelector('.download-wrapper');
+            btn.style.display = 'none';
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.style.display = 'block';
+            });
+        }
+
+        function downloadWord() {
+            const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = docx;
+
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            children: [new TextRun({ text: "Amin Saadati", bold: true, size: 36 })]
+                        }),
+                        new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            children: [new TextRun({ text: "Mashhad, Iran  |  +98 999 971 8581  |  amin.saadati5195@gmail.com", size: 20 })]
+                        }),
+                        new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            spacing: { after: 200 },
+                            children: [new TextRun({ text: "Homepage: https://aminsaadatiit.github.io/portfolio/  |  GitHub: https://github.com/AminSaadatiIT", size: 18, color: "0066CC" })]
+                        }),
+
+                        new Paragraph({ text: "EDUCATION", heading: HeadingLevel.HEADING_2, spacing: { before: 300, after: 100 } }),
+                        new Paragraph({
+                            children: [
+                                new TextRun({ text: "Bachelor’s Degree in Network Specialist", bold: true }),
+                                new TextRun({ text: ", Islamic Azad University, Iran" })
+                            ]
+                        }),
+                        new Paragraph({
+                            children: [new TextRun({ text: "Mehr 1401 (September 2022) – Present (Last semester – Fall term)", italics: true, size: 20, color: "555555" })],
+                            spacing: { after: 200 }
+                        }),
+
+                        new Paragraph({ text: "RESEARCH INTERESTS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        ...[
+                            "Network Security & High Redundancy WAN Connectivity",
+                            "VLANs, Active Directory, VMware, Hyper-V",
+                            "Help Desk & IT Support",
+                            "Event Preparation & Conference Organization",
+                            "System Administration (Windows Server, IIS)",
+                            "Cloud Storage & Data Management"
+                        ].map(item => new Paragraph({ text: "•  " + item, spacing: { after: 40 } })),
+
+                        new Paragraph({ text: "PUBLICATIONS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        new Paragraph({ text: "(Empty – will be added later)", spacing: { after: 200 } }),
+
+                        new Paragraph({ text: "POSTERS & PRESENTATIONS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        new Paragraph({ text: "•  Course Project Presentation – Cloud Storage Technologies and Applications in Data Storage", spacing: { after: 200 } }),
+
+                        new Paragraph({ text: "HONORS & AWARDS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        new Paragraph({ text: "None", spacing: { after: 200 } }),
+
+                        new Paragraph({ text: "SKILLS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        new Paragraph({ children: [new TextRun({ text: "Technical Skills:", bold: true })], spacing: { after: 60 } }),
+                        new Paragraph({ text: "•  Programming: Python (Junior), C++ (Mid-level), SQL (Junior), Arduino (Junior)", spacing: { after: 40 } }),
+                        new Paragraph({ text: "•  Software: Active Directory, Windows Server, IIS, VMware, Hyper-V, Help Desk, Printer & Hardware Maintenance, Network Troubleshooting", spacing: { after: 40 } }),
+                        new Paragraph({ text: "•  Online Platforms: GitHub, Personal Portfolio", spacing: { after: 100 } }),
+                        new Paragraph({ children: [new TextRun({ text: "Soft Skills:", bold: true })], spacing: { after: 60 } }),
+                        new Paragraph({ text: "•  Presentation: Strong professional and classroom presentations", spacing: { after: 40 } }),
+                        new Paragraph({ text: "•  Documentation: Clear and comprehensive technical reports", spacing: { after: 40 } }),
+                        new Paragraph({ text: "•  Teamwork: Managed over 150 staff members with a team of only 3 people", spacing: { after: 200 } }),
+
+                        new Paragraph({ text: "WORK EXPERIENCE", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        new Paragraph({ children: [new TextRun({ text: "Network Specialist @ Negin Razz Khurasan (Diplomat Hotel)", bold: true })], spacing: { after: 40 } }),
+                        new Paragraph({ children: [new TextRun({ text: "February 2024 – Present | Khorasan Razavi, Iran", italics: true, size: 20, color: "555555" })], spacing: { after: 60 } }),
+                        ...[
+                            "Handled support for over 150 employees with only 3 people in the IT team",
+                            "Full IT support: Troubleshooting, User Support, Printer Support, Hardware Maintenance",
+                            "CCTV installation, configuration and maintenance",
+                            "Daily Help Desk services",
+                            "Preparation and technical support for conferences, ceremonies and organizational events"
+                        ].map(item => new Paragraph({ text: "•  " + item, spacing: { after: 40 } })),
+
+                        new Paragraph({ children: [new TextRun({ text: "Digital Marketer @ Haghighi Rojaneh Tos", bold: true })], spacing: { before: 160, after: 40 } }),
+                        new Paragraph({ children: [new TextRun({ text: "8-month Internship (ended \~2 months before university start)", italics: true, size: 20, color: "555555" })], spacing: { after: 60 } }),
+                        ...[
+                            "Main focus on website SEO and digital marketing",
+                            "Executed digital campaigns and website optimization"
+                        ].map(item => new Paragraph({ text: "•  " + item, spacing: { after: 40 } })),
+
+                        new Paragraph({ text: "COURSES & CERTIFICATES", heading: HeadingLevel.HEADING_2, spacing: { before: 250, after: 100 } }),
+                        new Paragraph({
+                            children: [
+                                new TextRun({ text: "Advanced English", bold: true }),
+                                new TextRun({ text: " — Iran Language Institute (Adults’ Department) | Rating: Outstanding" })
+                            ],
+                            spacing: { after: 40 }
+                        }),
+                        new Paragraph({ text: "•  IT Support & Help Desk — Maktabkhooneh", spacing: { after: 40 } }),
+                        new Paragraph({ text: "•  IELTS Preparation — Currently in progress (B2 level)", spacing: { after: 40 } }),
+                        new Paragraph({ text: "•  Duolingo English — Currently learning (no certificate yet)", spacing: { after: 200 } }),
+
+                        new Paragraph({ text: "REFERENCES", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
+                        new Paragraph({
+                            children: [
+                                new TextRun({ text: "Dr. Mahdi Zolfaghari", bold: true }),
+                                new TextRun({ text: " — Director, Iran Language Institute" })
+                            ],
+                            spacing: { after: 60 }
+                        }),
+                        new Paragraph({
+                            children: [
+                                new TextRun({ text: "Dr. Asgari", bold: true }),
+                                new TextRun({ text: " — Faculty Member, Islamic Azad University" })
+                            ]
+                        })
+                    ]
+                }]
+            });
+
+            Packer.toBlob(doc).then(blob => {
+                saveAs(blob, "Amin_Saadati_CV.docx");
+            });
+        }
+    </script>
+</body>
+</html>
