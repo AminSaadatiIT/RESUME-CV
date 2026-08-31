@@ -820,8 +820,8 @@
 
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.umd.min.js"></script>
 
     <script>
         function toggleDlMenu() {
@@ -868,65 +868,52 @@
                 btn.style.display = 'block'; 
                 el.classList.remove('pdf-export');
             });
-        }
-
-        function downloadWord() {
+        }function downloadWord() {
             try {
-                const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = docx;
-                const doc = new Document({
-                sections: [{
-                    properties: {},
-                    children: [
-                        new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Amin Saadati", bold: true, size: 36 })] }),
-                        new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Network Specialist", size: 22, color: "D4A853" })] }),
-                        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 }, children: [new TextRun({ text: "Mashhad, Iran | +98 999 971 8581 | amin.saadati5195@gmail.com", size: 20 })] }),
-                        new Paragraph({ text: "PROFESSIONAL SUMMARY", heading: HeadingLevel.HEADING_2, spacing: { before: 300, after: 100 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Results-driven Network & IT Infrastructure Specialist with 2+ years of hands-on experience managing enterprise-grade systems for 150+ users. Proven track record in network administration, CCTV deployment, help desk operations, and technical event support. Known for efficiency under pressure — managing full IT operations with a team of just 3 people, achieving 95%+ same-day resolution rate, and maintaining zero critical system failures over 18 months." })] }),
-                        new Paragraph({ text: "CAREER OBJECTIVE", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Seeking a challenging position as a Network Engineer or IT Infrastructure Specialist where I can leverage my hands-on experience in enterprise network management, system administration, and technical support to contribute to organizational success. Committed to continuous professional development and obtaining advanced certifications in Cisco and cloud technologies." })], spacing: { after: 100 } }),
-                        new Paragraph({ text: "WORK EXPERIENCE", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Network & IT Specialist", bold: true }), new TextRun({ text: " — Negin Rose Khorasan (Diplomat Hotel)" })], spacing: { after: 40 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Feb 2024 – Present", italics: true, size: 20, color: "555555" })], spacing: { after: 60 } }),
-                        new Paragraph({ text: "• Managed full IT infrastructure for 150+ employees with a team of 3, reducing operational costs by 25%", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Installed and maintained CCTV surveillance systems across 5 buildings with 120+ IP cameras", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Provided daily help desk support with 95%+ same-day resolution rate, maintaining user satisfaction score of 4.8/5.0", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Delivered technical preparation and live support for 20+ conferences and events with zero technical failures", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Implemented network monitoring system that reduced downtime by 40% and improved response time by 60%", spacing: { after: 100 } }),
-                        new Paragraph({ text: "EDUCATION", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Bachelor's Degree in Network Engineering", bold: true }), new TextRun({ text: " — Islamic Azad University" })] }),
-                        new Paragraph({ children: [new TextRun({ text: "Sep 2022 – Present", italics: true, size: 20, color: "555555" })], spacing: { after: 200 } }),
-                        new Paragraph({ text: "CERTIFICATIONS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ text: "• CCNA — Cisco Certified Network Associate", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• MTCNA — MikroTik Certified Network Associate", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Advanced English — Iran Language Institute (Outstanding)", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• IT Support & Help Desk — Maktabkhooneh", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• IELTS Preparation — In Progress (B2+)", spacing: { after: 200 } }),
-                        new Paragraph({ text: "KEY ACHIEVEMENTS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ text: "• Cost Optimization: Reduced IT operational costs by 25% through strategic vendor negotiations", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• System Uptime: Maintained 99.5% system availability across all critical infrastructure for 18 months", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Team Efficiency: Managed complete IT operations with team of 3, handling workload requiring 5-6 staff", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Process Improvement: Implemented automated ticketing system, improving response time by 60%", spacing: { after: 100 } }),
-                        new Paragraph({ text: "SKILLS", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ text: "• Networking: Cisco, MikroTik, VLANs, WAN, Firewall", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Infrastructure: Structured Cabling, Server Room, CCTV, Network Monitoring", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Systems: Windows Server, Active Directory, VMware, Hyper-V, IIS", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Programming: Python, C++, SQL, Arduino", spacing: { after: 40 } }),
-                        new Paragraph({ text: "• Soft Skills: Team Leadership, Client Communication, Problem Solving", spacing: { after: 200 } }),
-                        new Paragraph({ text: "REFERENCES", heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Dr. Mahdi Zolfaghari", bold: true }), new TextRun({ text: " — Director, Iran Language Institute" })], spacing: { after: 60 } }),
-                        new Paragraph({ children: [new TextRun({ text: "Dr. Asgari", bold: true }), new TextRun({ text: " — Faculty Member, Islamic Azad University" })] })
-                    ]
-                }]
-            });
-            Packer.toBlob(doc).then(blob => { 
-                    saveAs(blob, "Amin_Saadati_CV.docx"); 
-                }).catch(err => {
-                    console.error('Error generating Word:', err);
-                    alert('Error generating Word document. Please try again.');
-                });
+                // Get the CV content HTML
+                const cvContent = document.getElementById('cv-content');
+                
+                // Clone the content to modify for Word export
+                const clone = cvContent.cloneNode(true);
+                
+                // Add Word-compatible styles
+                const style = document.createElement('style');
+                style.textContent = `
+                    body { font-family: Calibri, sans-serif; font-size: 11pt; }
+                    .sidebar { background: #0f172a; color: white; padding: 20px; width: 250px; }
+                    .main { padding: 20px; }
+                    h1, h2, h3 { color: #0f172a; }
+                    .section-title { color: #0f172a; border-bottom: 2px solid #d4a853; padding-bottom: 5px; }
+                    .exp-list li { margin-bottom: 5px; }
+                    strong { color: #0f172a; }
+                `;
+                
+                // Create Word-compatible HTML
+                const html = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="utf-8">
+                        <style>${style.textContent}</style>
+                    </head>
+                    <body>
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <h1 style="margin: 0; color: #0f172a;">Amin Saadati</h1>
+                            <p style="margin: 5px 0; color: #d4a853; font-size: 12pt;">Network Specialist</p>
+                            <p style="margin: 5px 0; color: #666; font-size: 10pt;">Mashhad, Iran | +98 999 971 8581 | amin.saadati5195@gmail.com</p>
+                        </div>
+                        ${clone.innerHTML}
+                    </body>
+                    </html>
+                `;
+                
+                // Convert to Word and download
+                const blob = htmlDocx.asBlob(html);
+                saveAs(blob, "Amin_Saadati_CV.docx");
+                
             } catch (err) {
-                console.error('Error:', err);
-                alert('Error generating Word document. Please refresh and try again.');
+                console.error('Error generating Word:', err);
+                alert('Error generating Word document. Please try again.');
             }
         }
     </script>
