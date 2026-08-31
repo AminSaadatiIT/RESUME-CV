@@ -520,6 +520,21 @@
             .download-float { display: none !important; }
             .skill-tag:hover, .cert-item:hover { transform: none; }
         }
+
+        /* PDF Export - prevent page breaks */
+        .pdf-export {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .pdf-export .sidebar,
+        .pdf-export .main {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .pdf-export .main-section {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
     </style>
 </head>
 <body>
@@ -829,18 +844,36 @@
             const el = document.getElementById('cv-content');
             const btn = document.querySelector('.download-float');
             btn.style.display = 'none';
+            
+            // Add print class to prevent page breaks
+            el.classList.add('pdf-export');
+            
             html2pdf().set({
-                margin: [8, 8, 8, 8],
+                margin: [10, 10, 10, 10],
                 filename: 'Amin_Saadati_CV.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(el).save().then(() => { btn.style.display = 'block'; });
+                html2canvas: { 
+                    scale: 2, 
+                    useCORS: true,
+                    logging: false,
+                    letterRendering: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait'
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            }).from(el).save().then(() => { 
+                btn.style.display = 'block'; 
+                el.classList.remove('pdf-export');
+            });
         }
 
         function downloadWord() {
-            const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = docx;
-            const doc = new Document({
+            try {
+                const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = docx;
+                const doc = new Document({
                 sections: [{
                     properties: {},
                     children: [
@@ -885,7 +918,16 @@
                     ]
                 }]
             });
-            Packer.toBlob(doc).then(blob => { saveAs(blob, "Amin_Saadati_CV.docx"); });
+            Packer.toBlob(doc).then(blob => { 
+                    saveAs(blob, "Amin_Saadati_CV.docx"); 
+                }).catch(err => {
+                    console.error('Error generating Word:', err);
+                    alert('Error generating Word document. Please try again.');
+                });
+            } catch (err) {
+                console.error('Error:', err);
+                alert('Error generating Word document. Please refresh and try again.');
+            }
         }
     </script>
 </body>
