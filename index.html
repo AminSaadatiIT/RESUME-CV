@@ -403,6 +403,35 @@
         }
 
         /* Download Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--navy);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(15,23,42,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212,168,83,0.35);
+        }
+
         .download-float {
             position: fixed;
             bottom: 30px;
@@ -504,6 +533,12 @@
                 flex-direction: column;
                 gap: 2px;
             }
+            .back-btn {
+                top: 12px;
+                left: 12px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
             .download-float {
                 bottom: 20px;
                 right: 20px;
@@ -517,6 +552,7 @@
                 margin: 0;
                 min-height: auto;
             }
+            .back-btn { display: none !important; }
             .download-float { display: none !important; }
             .skill-tag:hover, .cert-item:hover { transform: none; }
         }
@@ -805,6 +841,12 @@
 
         </main>
     </div>
+
+    <!-- Back to Portfolio Button -->
+    <a href="https://aminsaadatiit.github.io/portfolio/" class="back-btn" title="Back to Portfolio">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Portfolio</span>
+    </a>
 
     <!-- Download Button -->
     <div class="download-float">
