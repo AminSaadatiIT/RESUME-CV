@@ -381,7 +381,10 @@
     // at mouse position — zero perceived latency. The ring lerps gently
     // for a premium trailing feel. Everything is transform-only.
     function initCustomCursor() {
-        if (prefersReducedMotion || isMobile) return;
+        // NOTE: deliberately NOT gated on prefersReducedMotion — the dot/ring
+        // is pointer feedback, not decoration. Reduced-motion users still get
+        // the 1:1 dot; only the trailing lerp is switched off below.
+        if (isMobile) return;
         const dot = $('#cursorDot');
         const ring = $('#cursorRing');
         if (!dot || !ring) return;
@@ -401,8 +404,10 @@
         }, { passive: true });
 
         (function ringLoop() {
-            rx += (mx - rx) * 0.18;
-            ry += (my - ry) * 0.18;
+            // Reduced motion: ring snaps to the dot (no trailing animation)
+            const f = prefersReducedMotion ? 1 : 0.18;
+            rx += (mx - rx) * f;
+            ry += (my - ry) * f;
             ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%,-50%)`;
             requestAnimationFrame(ringLoop);
         })();
@@ -427,6 +432,8 @@
         // Hide when pointer leaves the window
         document.addEventListener('mouseleave', () => { dot.classList.remove('is-visible'); ring.classList.remove('is-visible'); });
         document.addEventListener('mouseenter', () => { if (seen) { dot.classList.add('is-visible'); ring.classList.add('is-visible'); } });
+
+        console.info('[cursor] custom cursor active — v20260926');
     }
 
     // ═══════ CURSOR GLOW — transform-only, snappy follow ═══════
