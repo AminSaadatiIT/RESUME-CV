@@ -698,7 +698,37 @@
         });
     }
 
-    // ═══════ PROJECT MODAL ═══════
+    // ═══════ PROJECT MODAL ═══════    // ═══════ MODAL ACCESSIBILITY HELPERS ═══════
+    // Focus trap: keeps Tab cycling inside an open dialog, restores focus on close.
+    const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    let lastFocused = null;
+
+    function trapFocus(modal, e) {
+        const focusables = $$(FOCUSABLE, modal).filter(el => el.offsetParent !== null);
+        if (!focusables.length) { e.preventDefault(); return; }
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault(); first.focus();
+        }
+    }
+
+    function openModal(modal) {
+        lastFocused = document.activeElement;
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        const target = $$(FOCUSABLE, modal).filter(el => el.offsetParent !== null)[0];
+        (target || modal).focus();
+    }
+
+    function closeModal(modal) {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
     function openProjectModal(id) {
         const project = siteData.projects.find(p => p.id === id);
         if (!project) return;
@@ -721,15 +751,11 @@
         var metricsHtml = project.metrics ? '<div class="modal-metrics" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">' + project.metrics.map(m => '<span class="metric-tag" style="background:rgba(232,168,56,0.12);border:1px solid rgba(232,168,56,0.25);padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;color:#E8A838;">' + escapeHTML(m) + '</span>').join('') + '</div>' : '';
         tags.innerHTML = metricsHtml + (project.categories || []).map(c => `<span class="tag">${escapeHTML(c)}</span>`).join('');
 
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-        modal.focus();
+        openModal(modal);
     }
-
     function closeProjectModal() {
         const modal = $('#projectModal');
-        modal.hidden = true;
-        document.body.style.overflow = '';
+        if (modal && !modal.hidden) closeModal(modal);
     }
 
     function initModal() {
@@ -740,6 +766,9 @@
         if (modal) {
             modal.addEventListener('click', e => {
                 if (e.target === modal) closeProjectModal();
+            });
+            modal.addEventListener('keydown', e => {
+                if (e.key === 'Tab') trapFocus(modal, e);
             });
         }
         document.addEventListener('keydown', e => {
@@ -854,18 +883,15 @@
 
         const stars = $$('.star', $('#reviewStars'));
 
-        openBtn.addEventListener('click', () => {
-            modal.hidden = false;
-            document.body.style.overflow = 'hidden';
-        });
+        openBtn.addEventListener('click', () => openModal(modal));
 
-        function closeModal() {
-            modal.hidden = true;
-            document.body.style.overflow = '';
-        }
-        closeBtn?.addEventListener('click', closeModal);
+        const closeReviewModal = () => closeModal(modal);
+        closeBtn?.addEventListener('click', closeReviewModal);
         modal.addEventListener('click', e => {
-            if (e.target === modal) closeModal();
+            if (e.target === modal) closeReviewModal();
+        });
+        modal.addEventListener('keydown', e => {
+            if (e.key === 'Tab') trapFocus(modal, e);
         });
 
         const starsContainer = $('#reviewStars');
@@ -962,8 +988,7 @@
             `;
             form.querySelector('.review-close-btn')?.addEventListener('click', () => {
                 const m = document.getElementById('reviewModal');
-                if (m) m.hidden = true;
-                document.body.style.overflow = '';
+                if (m && !m.hidden) closeModal(m);
             });
         });
     }
@@ -1048,8 +1073,11 @@
                     // 2) GUARANTEED fallback: opens the visitor's mail client pre-filled
                     //    with the full message — works from every browser, no service needed.
                     // ═══════ EMAIL DELIVERY CONFIG ═══════
-                    // Set these three to activate direct email delivery via EmailJS.
-                    // Instructions: emailjs.com → create service + template → paste IDs here.
+                    // PRIMARY: Web3Forms — free, no server, sends silently to your inbox.
+                    // 1) Go to https://web3forms.com → enter your email → receive Access Key by email (1 min)
+                    // 2) Paste the key below. Done — forms then send directly, no mail app involved.
+                    // FALLBACK 1: EmailJS (if configured) · FALLBACK 2: visitor's mail client (mailto)
+                    const WEB3FORMS_ACCESS_KEY = ''; // e.g. 'a1b2c3d4-5678-90ab-cdef-1234567890ab'
                     const EMAILJS_SERVICE_ID  = ''; // e.g. 'service_abc1234'
                     const EMAILJS_TEMPLATE_ID = ''; // e.g. 'template_xyz5678'
                     const EMAILJS_PUBLIC_KEY  = ''; // e.g. 'aBcD1234EfGh'
@@ -1065,34 +1093,66 @@
                     const message = formData.message || formData.description || '';
 
                     async function deliverMessage() {
-                        let sentViaEmailJS = false;
-                        const cfg = { serviceId: EMAILJS_SERVICE_ID, templateId: EMAILJS_TEMPLATE_ID, publicKey: EMAILJS_PUBLIC_KEY };
-                        const stored = (() => { try { return JSON.parse(localStorage.getItem('portfolio_emailjs') || '{}'); } catch { return {}; } })();
-                        const svc = cfg.serviceId || stored.serviceId || '';
-                        const tpl = cfg.templateId || stored.templateId || '';
-                        const key = cfg.publicKey || stored.publicKey || '';
-                        const ownerEmail = OWNER_EMAIL || localStorage.getItem('portfolio_admin_email') || '';
+                        let sent = false;
 
-                        if (svc && tpl && key && window.emailjs) {
+                        // 1) Web3Forms — silent, direct to inbox (recommended)
+                        if (WEB3FORMS_ACCESS_KEY) {
                             try {
-                                await window.emailjs.send(svc, tpl, {
-                                    to_email: ownerEmail,
-                                    from_name: name,
-                                    from_email: email,
-                                    company,
-                                    service,
-                                    budget, timeline,
-                                    subject,
-                                    message
-                                }, key);
-                                sentViaEmailJS = true;
+                                const res = await fetch('https://api.web3forms.com/submit', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                                    body: JSON.stringify({
+                                        access_key: WEB3FORMS_ACCESS_KEY,
+                                        subject: '[Portfolio] ' + subject,
+                                        from_name: name,
+                                        replyto: email,
+                                        name,
+                                        email,
+                                        company,
+                                        service,
+                                        budget: budget || '—',
+                                        timeline: timeline || '—',
+                                        message
+                                    })
+                                });
+                                const data = await res.json().catch(() => ({}));
+                                if (res.ok && data.success) sent = true;
+                                else console.warn('Web3Forms rejected:', data);
                             } catch (err) {
-                                console.warn('EmailJS failed, using mailto fallback:', err);
+                                console.warn('Web3Forms failed:', err);
                             }
                         }
 
-                        // GUARANTEED fallback: open the visitor's own mail client, fully pre-filled.
-                        if (!sentViaEmailJS) {
+                        // 2) EmailJS (if configured)
+                        if (!sent) {
+                            const cfg = { serviceId: EMAILJS_SERVICE_ID, templateId: EMAILJS_TEMPLATE_ID, publicKey: EMAILJS_PUBLIC_KEY };
+                            const stored = (() => { try { return JSON.parse(localStorage.getItem('portfolio_emailjs') || '{}'); } catch { return {}; } })();
+                            const svc = cfg.serviceId || stored.serviceId || '';
+                            const tpl = cfg.templateId || stored.templateId || '';
+                            const key = cfg.publicKey || stored.publicKey || '';
+                            const ownerEmail = OWNER_EMAIL || localStorage.getItem('portfolio_admin_email') || '';
+
+                            if (svc && tpl && key && window.emailjs) {
+                                try {
+                                    await window.emailjs.send(svc, tpl, {
+                                        to_email: ownerEmail,
+                                        from_name: name,
+                                        from_email: email,
+                                        company,
+                                        service,
+                                        budget, timeline,
+                                        subject,
+                                        message
+                                    }, key);
+                                    sent = true;
+                                } catch (err) {
+                                    console.warn('EmailJS failed, using mailto fallback:', err);
+                                }
+                            }
+                        }
+
+                        // 3) GUARANTEED fallback: open the visitor's own mail client, fully pre-filled.
+                        if (!sent) {
                             const body = [
                                 'Name: ' + name,
                                 'Email: ' + email,
