@@ -1,0 +1,620 @@
+/* ═══════════════════════════════════════════
+   MOBILE-FIX.CSS — Comprehensive Mobile Fixes
+   ═══════════════════════════════════════════ */
+
+/* ── Performance: GPU hints ── */
+.orbit, .orbit-1, .orbit-2, .orbit-3, .orbit-4 {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+.avatar {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+.circles-container {
+    contain: layout paint;
+    will-change: transform;
+}
+.orbit {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+.network-icon {
+    contain: layout paint;
+    will-change: transform;
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE (max-width: 768px)
+   Stack hero vertically, fix all spacing
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── Hero Section — Stack Vertically ── */
+    .hero-new {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 80px 16px 24px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        text-align: left !important;
+        gap: 20px !important;
+        overflow: visible !important;
+    }
+
+    .hero-new::after {
+        display: none !important;
+    }
+
+    /* ── Hero Left (Text) — Full Width ── */
+    .hero-left {
+        flex: none !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        text-align: left !important;
+        overflow: visible !important;
+    }
+
+    /* ── Badge — Readable ── */
+    .hero-badge-intro {
+        font-size: 11px !important;
+        padding: 8px 14px !important;
+        margin-bottom: 12px !important;
+        justify-content: flex-start !important;
+        border-radius: 50px !important;
+        background: rgba(160,104,255,0.1) !important;
+        border: 1px solid rgba(160,104,255,0.3) !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .hero-divider {
+        display: none !important;
+    }
+
+    .hero-status {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        font-size: 11px !important;
+    }
+
+    /* ── Heading — Comfortable ── */
+    .hero-heading {
+        font-size: clamp(24px, 7vw, 32px) !important;
+        line-height: 1.15 !important;
+        margin-bottom: 10px !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    .hero-heading-accent {
+        font-size: 0.85em !important;
+    }
+
+    /* ── Subtitle — Readable ── */
+    .hero-subtitle {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+        margin-bottom: 16px !important;
+        max-width: 100% !important;
+    }
+
+    /* ── Stats — Compact Row ── */
+    .hero-stats {
+        display: flex !important;
+        justify-content: space-around !important;
+        width: 100% !important;
+        padding: 14px 12px !important;
+        margin-bottom: 16px !important;
+        border-radius: 12px !important;
+        gap: 0 !important;
+        background: rgba(160,104,255,0.08) !important;
+        border: 1px solid rgba(160,104,255,0.2) !important;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .stat-item {
+        flex: 1 !important;
+        text-align: center !important;
+        min-width: 0 !important;
+    }
+
+    .stat-number {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        display: block !important;
+    }
+
+    .stat-label {
+        font-size: 10px !important;
+        letter-spacing: 0.05em !important;
+        text-transform: uppercase !important;
+        display: block !important;
+    }
+
+    .stat-divider {
+        width: 1px !important;
+        height: 28px !important;
+        flex: 0 0 1px !important;
+    }
+
+    /* ── CTA Buttons ── */
+    .hero-cta-group {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-top: 16px !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        opacity: 1 !important;
+        animation: none !important;
+    }
+
+    .btn-primary {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        border-radius: 10px !important;
+        flex: 1 1 45% !important;
+        min-width: 0 !important;
+        gap: 6px !important;
+    }
+
+    .btn-secondary {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        border-radius: 10px !important;
+        flex: 1 1 45% !important;
+        min-width: 0 !important;
+    }
+
+    .btn-outline {
+        display: inline-flex !important;
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+        border-radius: 10px !important;
+    }
+
+    /* ── Hero Right (Orbit) — Centered Below Text ── */
+    .hero-right {
+        flex: none !important;
+        width: 200px !important;
+        height: 200px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        position: relative !important;
+        align-self: center !important;
+    }
+
+    .circles-container {
+        width: 200px !important;
+        height: 200px !important;
+        transform: scale(0.35) !important;
+        transform-origin: center center !important;
+    }
+
+    /* ── Network Icons — Glow Effect ── */
+    .network-icon {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 0 20px rgba(160,104,255,0.6) !important;
+    }
+
+    .network-icon svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .network-icon span {
+        display: none !important;
+    }
+
+    /* Glow colors per icon */
+    .avatar-orbit1-1 .network-icon { box-shadow: 0 0 25px rgba(160,104,255,0.8) !important; background: rgba(160,104,255,0.2) !important; border-color: rgba(160,104,255,0.6) !important; }
+    .avatar-orbit1-1 .network-icon svg { color: #A068FF !important; }
+
+    .avatar-orbit2-1 .network-icon { box-shadow: 0 0 25px rgba(255,200,0,0.8) !important; background: rgba(255,200,0,0.2) !important; border-color: rgba(255,200,0,0.6) !important; }
+    .avatar-orbit2-1 .network-icon svg { color: #FFC800 !important; }
+
+    .avatar-orbit2-2 .network-icon { box-shadow: 0 0 25px rgba(255,100,150,0.8) !important; background: rgba(255,100,150,0.2) !important; border-color: rgba(255,100,150,0.6) !important; }
+    .avatar-orbit2-2 .network-icon svg { color: #FF6496 !important; }
+
+    .avatar-orbit2-3 .network-icon { box-shadow: 0 0 25px rgba(100,150,255,0.8) !important; background: rgba(100,150,255,0.2) !important; border-color: rgba(100,150,255,0.6) !important; }
+    .avatar-orbit2-3 .network-icon svg { color: #6496FF !important; }
+
+    .avatar-orbit3-1 .network-icon { box-shadow: 0 0 25px rgba(255,100,150,0.8) !important; background: rgba(255,100,150,0.2) !important; border-color: rgba(255,100,150,0.6) !important; }
+    .avatar-orbit3-1 .network-icon svg { color: #FF6496 !important; }
+
+    .avatar-orbit4-1 .network-icon { box-shadow: 0 0 25px rgba(160,104,255,0.8) !important; background: rgba(160,104,255,0.2) !important; border-color: rgba(160,104,255,0.6) !important; }
+    .avatar-orbit4-1 .network-icon svg { color: #A068FF !important; }
+
+    .avatar-orbit4-2 .network-icon { box-shadow: 0 0 25px rgba(255,150,50,0.8) !important; background: rgba(255,150,50,0.2) !important; border-color: rgba(255,150,50,0.6) !important; }
+    .avatar-orbit4-2 .network-icon svg { color: #FF9632 !important; }
+
+    .avatar-orbit4-3 .network-icon { box-shadow: 0 0 25px rgba(255,100,150,0.8) !important; background: rgba(255,100,150,0.2) !important; border-color: rgba(255,100,150,0.6) !important; }
+    .avatar-orbit4-3 .network-icon svg { color: #FF6496 !important; }
+
+    .avatar-orbit4-4 .network-icon { box-shadow: 0 0 25px rgba(160,104,255,0.8) !important; background: rgba(160,104,255,0.2) !important; border-color: rgba(160,104,255,0.6) !important; }
+    .avatar-orbit4-4 .network-icon svg { color: #A068FF !important; }
+
+    .orbit-number {
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+
+    .orbit-label {
+        font-size: 7px !important;
+        letter-spacing: 0.05em !important;
+    }
+
+    /* ── Scroll Indicator — Hidden ── */
+    .scroll-indicator {
+        display: none !important;
+    }
+
+    /* ═══ NAVIGATION ═══ */
+    .nav {
+        display: none !important;
+    }
+
+    .nav.open {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 60px !important;
+        right: 0 !important;
+        left: 0 !important;
+        padding: 16px 20px !important;
+        background: rgba(10,10,10,0.96) !important;
+        backdrop-filter: blur(24px) !important;
+        -webkit-backdrop-filter: blur(24px) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+        gap: 2px !important;
+        z-index: 100 !important;
+        box-shadow: 0 16px 48px rgba(0,0,0,0.5) !important;
+    }
+
+    .nav .nav-link {
+        padding: 12px 16px !important;
+        font-size: 16px !important;
+        border-radius: 10px !important;
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .mobile-toggle {
+        display: grid !important;
+    }
+
+    .btn-hire {
+        display: none !important;
+    }
+
+    /* ═══ ABOUT SECTION ═══ */
+    .about-premium {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        padding: 0 !important;
+    }
+
+    .about-profile-card {
+        max-width: 100% !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+        box-shadow: 0 16px 48px rgba(0,0,0,0.5) !important;
+    }
+
+    .profile-photo-container {
+        height: 320px !important;
+    }
+
+    .profile-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .profile-floating-content {
+        padding: 20px !important;
+    }
+
+    .profile-name {
+        font-size: 22px !important;
+    }
+
+    .profile-title {
+        font-size: 13px !important;
+    }
+
+    .about-glass-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .about-bio-premium {
+        font-size: 14px !important;
+        line-height: 1.65 !important;
+    }
+
+    /* ═══ SKILLS ═══ */
+    .skills-groups {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* ═══ PROJECTS ═══ */
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* ═══ SECTIONS ═══ */
+    .section {
+        padding: 48px 16px !important;
+    }
+
+    .section-header {
+        margin-bottom: 28px !important;
+    }
+
+    .section-title {
+        font-size: clamp(22px, 6vw, 28px) !important;
+        margin-bottom: 12px !important;
+    }
+
+    .section-desc {
+        font-size: 14px !important;
+    }
+
+    /* ═══ CONTACT FORM ═══ */
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-form {
+        padding: 24px 16px !important;
+        border-radius: 14px !important;
+    }
+
+    /* iOS zoom prevention: inputs ≥ 16px */
+    .form-input,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        font-size: 16px !important;
+    }
+
+    .form-textarea {
+        min-height: 100px !important;
+    }
+
+    /* ═══ TIMELINE ═══ */
+    .timeline {
+        padding-right: 24px !important;
+    }
+
+    .timeline-dot {
+        right: -24px !important;
+        margin-right: 8px !important;
+    }
+
+    /* ═══ TESTIMONIALS ═══ */
+    .testimonial-card {
+        padding: 24px !important;
+    }
+
+    .testimonial-text {
+        font-size: 15px !important;
+        line-height: 1.7 !important;
+    }
+
+    /* ═══ FOOTER ═══ */
+    .footer {
+        padding: 40px 16px 24px !important;
+    }
+
+    .footer-columns {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 28px !important;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 8px !important;
+    }
+
+    .footer-brand {
+        justify-content: center !important;
+        text-align: center !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    /* ═══ MODAL ═══ */
+    .modal {
+        margin: 12px !important;
+        max-height: 90vh !important;
+        border-radius: 16px !important;
+    }
+
+    .modal-body {
+        padding: 20px !important;
+    }
+
+    /* ═══ PERFORMANCE ═══ */
+    .particle, .meteor {
+        display: none !important;
+    }
+    #particles {
+        display: none !important;
+    }
+    #cursorGlow {
+        display: none !important;
+    }
+    .aurora-grid {
+        display: none !important;
+    }
+    .reveal, .reveal-stagger, .project-card {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    .section.expand-target {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    .glass-card, .contact-form, .footer-col {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    .skill-group, .timeline-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Slower orbits on mobile for battery */
+    .orbit { animation-duration: 60s !important; }
+    .orbit-1 { animation-duration: 50s !important; }
+    .orbit-2 { animation-duration: 65s !important; }
+    .orbit-3 { animation-duration: 80s !important; }
+    .orbit-4 { animation-duration: 100s !important; }
+
+    .avatar {
+        animation: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   SMALL MOBILE (max-width: 480px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .hero-new {
+        padding: 72px 12px 20px !important;
+        gap: 16px !important;
+    }
+
+    .hero-heading {
+        font-size: clamp(20px, 6.5vw, 26px) !important;
+    }
+
+    .hero-badge-intro {
+        font-size: 10px !important;
+        padding: 6px 12px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 13px !important;
+    }
+
+    .hero-right {
+        width: 160px !important;
+        height: 160px !important;
+    }
+
+    .circles-container {
+        width: 160px !important;
+        height: 160px !important;
+        transform: scale(0.28) !important;
+    }
+
+    .stat-number {
+        font-size: 18px !important;
+    }
+
+    .stat-label {
+        font-size: 9px !important;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 11px 14px !important;
+        font-size: 13px !important;
+    }
+
+    .btn-outline {
+        padding: 9px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .profile-photo-container {
+        height: 260px !important;
+    }
+
+    .about-bio-premium {
+        font-size: 13px !important;
+    }
+
+    .section {
+        padding: 36px 12px !important;
+    }
+
+    .contact-form {
+        padding: 20px 14px !important;
+    }
+
+    .testimonial-card {
+        padding: 18px !important;
+    }
+
+    .testimonial-text {
+        font-size: 14px !important;
+    }
+
+    .footer {
+        padding: 32px 12px 20px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   TABLET (769px – 1024px)
+   ═══════════════════════════════════════════ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-new {
+        padding: 100px 32px 48px !important;
+    }
+
+    .hero-left {
+        flex: 0 1 55% !important;
+    }
+
+    .hero-right {
+        flex: 0 1 45% !important;
+        width: 400px !important;
+        height: 400px !important;
+        max-width: 45vw !important;
+        max-height: 45vw !important;
+    }
+
+    .circles-container {
+        transform: scale(0.7) !important;
+    }
+
+    .about-premium {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    .profile-photo-container {
+        height: 360px !important;
+    }
+}

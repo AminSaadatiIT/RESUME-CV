@@ -1,1039 +1,1008 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amin Saadati — Network Infrastructure Specialist</title>
+    <meta name="description" content="Amin Saadati - Network Infrastructure & Security Systems Specialist. Expert in Structured Cabling, CCTV, Fiber Optic, Access Control, and Server Management. Available for freelance projects in Iran.">
+    <meta name="author" content="Amin Saadati">
+    <meta name="keywords" content="network infrastructure, cabling, CCTV, fiber optic, security systems, access control, server management, structured cabling, IT specialist, Iran">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Amin Saadati — Network Infrastructure & Security Specialist">
+    <meta property="og:description" content="Expert in designing and implementing network infrastructure and security systems. 50+ projects completed for businesses across Iran.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amin Saadati — Portfolio">
+    <meta name="twitter:description" content="Network Infrastructure & Security Systems Specialist">
+    <meta name="twitter:image" content="images/logo.png">
+
+    <link rel="canonical" href="https://aminsaadati.com">
+
+    <title>Amin Saadati — Network Infrastructure & Security Specialist | Mashhad, Iran</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Amin Saadati — Network Infrastructure & Security",
+        "description": "Network infrastructure and security systems specialist. Structured cabling, CCTV, fiber optics, access control, and server room builds across Iran.",
+        "telephone": "+989999718581",
+        "email": "amin.saadati5195@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Mashhad",
+            "addressCountry": "IR"
+        },
+        "areaServed": "Iran",
+        "priceRange": "$$",
+        "founder": {
+            "@type": "Person",
+            "name": "Amin Saadati",
+            "jobTitle": "Network Infrastructure Specialist"
+        },
+        "sameAs": [
+            "https://github.com/AminSaadatiIT",
+            "https://www.linkedin.com/in/aminsaadati",
+            "https://t.me/AminSaadati"
+        ]
+    }
+    </script>
+    
+    <!-- Google Fonts: Space Grotesk (Display) + Inter (Body) + JetBrains Mono (Code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --navy: #0f172a;
-            --navy-light: #1e293b;
-            --slate: #334155;
-            --gray: #64748b;
-            --light: #94a3b8;
-            --silver: #cbd5e1;
-            --pearl: #f1f5f9;
-            --white: #ffffff;
-            --gold: #d4a853;
-            --gold-light: #e8c97a;
-            --accent: #2563eb;
-            --accent-light: #3b82f6;
-            --green: #10b981;
-            --sidebar-w: 280px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: var(--slate);
-            background: #e2e8f0;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .page {
-            max-width: 900px;
-            margin: 30px auto;
-            background: var(--white);
-            display: flex;
-            min-height: 1200px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-            position: relative;
-        }
-
-        /* ═══ SIDEBAR ═══ */
-        .sidebar {
-            width: var(--sidebar-w);
-            background: var(--navy);
-            color: var(--silver);
-            padding: 40px 28px;
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sidebar::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-        }
-
-        .sidebar-name {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--white);
-            letter-spacing: -0.5px;
-            line-height: 1.15;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-title {
-            font-size: 11.5px;
-            font-weight: 500;
-            color: var(--gold);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 28px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 24px;
-        }
-
-        .sidebar-label {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 12px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid rgba(212,168,83,0.25);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-size: 12.5px;
-            line-height: 1.5;
-        }
-
-        .contact-icon {
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-            margin-top: 2px;
-            color: var(--gold);
-        }
-
-        .contact-item a {
-            color: var(--silver);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .contact-item a:hover {
-            color: var(--gold-light);
-        }
-
-        /* Skills */
-        .skill-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--silver);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-            margin: 0 4px 6px 0;
-            transition: all 0.2s;
-        }
-
-        .skill-tag:hover {
-            background: rgba(212,168,83,0.15);
-            border-color: var(--gold);
-            color: var(--gold-light);
-        }
-
-        .skill-group-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--light);
-            margin-bottom: 8px;
-            margin-top: 12px;
-        }
-
-        .skill-group-title:first-child {
-            margin-top: 0;
-        }
-
-        /* Language */
-        .lang-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 12.5px;
-        }
-
-        .lang-bar {
-            width: 80px;
-            height: 4px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .lang-fill {
-            height: 100%;
-            background: var(--gold);
-            border-radius: 2px;
-        }
-
-        /* ═══ MAIN CONTENT ═══ */
-        .main {
-            flex: 1;
-            padding: 40px 40px 40px 36px;
-        }
-
-        .main-section {
-            margin-bottom: 28px;
-        }
-
-        .section-title {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--navy);
-            margin-bottom: 14px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-icon {
-            width: 18px;
-            height: 18px;
-            color: var(--gold);
-        }
-
-        /* Summary */
-        .summary-text {
-            font-size: 13.5px;
-            line-height: 1.7;
-            color: var(--slate);
-        }
-
-        .summary-text strong {
-            color: var(--navy);
-        }
-
-        /* Experience */
-        .exp-item {
-            margin-bottom: 20px;
-            padding-left: 16px;
-            border-left: 2px solid var(--pearl);
-            position: relative;
-        }
-
-        .exp-item::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 6px;
-            width: 8px;
-            height: 8px;
-            background: var(--gold);
-            border-radius: 50%;
-        }
-
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-bottom: 4px;
-        }
-
-        .exp-role {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--navy);
-        }
-
-        .exp-date {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--accent);
-            background: rgba(37,99,235,0.06);
-            padding: 2px 10px;
-            border-radius: 3px;
-            white-space: nowrap;
-        }
-
-        .exp-company {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--gray);
-            margin-bottom: 8px;
-        }
-
-        .exp-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .exp-list li {
-            position: relative;
-            padding-left: 16px;
-            margin-bottom: 5px;
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--slate);
-        }
-
-        .exp-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 5px;
-            height: 5px;
-            background: var(--gold);
-            border-radius: 50%;
-        }
-
-        /* Education */
-        .edu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .edu-degree {
-            font-weight: 700;
-            color: var(--navy);
-            font-size: 13.5px;
-        }
-
-        .edu-school {
-            color: var(--gray);
-            font-size: 13px;
-        }
-
-        .edu-date {
-            font-size: 12px;
-            color: var(--accent);
-            white-space: nowrap;
-        }
-
-        /* Certificates */
-        .cert-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            background: var(--pearl);
-            border-radius: 6px;
-            margin-bottom: 8px;
-            transition: all 0.2s;
-        }
-
-        .cert-item:hover {
-            background: rgba(212,168,83,0.08);
-            transform: translateX(4px);
-        }
-
-        .cert-badge {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .cert-badge svg {
-            width: 16px;
-            height: 16px;
-            color: var(--white);
-        }
-
-        .cert-info {
-            flex: 1;
-        }
-
-        .cert-name {
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--navy);
-        }
-
-        .cert-detail {
-            font-size: 11.5px;
-            color: var(--gray);
-        }
-
-        .cert-link {
-            font-size: 11px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .cert-link:hover {
-            text-decoration: underline;
-        }
-
-        /* References */
-        .ref-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--pearl);
-        }
-
-        .ref-item:last-child {
-            border-bottom: none;
-        }
-
-        .ref-name {
-            font-weight: 600;
-            color: var(--navy);
-            font-size: 13px;
-        }
-
-        .ref-role {
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        /* Download Button */
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: var(--navy);
-            color: var(--white);
-            border: none;
-            padding: 12px 20px;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 25px rgba(15,23,42,0.3);
-            transition: all 0.3s;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .back-btn:hover {
-            background: var(--gold);
-            color: var(--navy);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(212,168,83,0.35);
-        }
-
-        .download-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-
-        .dl-btn {
-            background: var(--navy);
-            color: var(--white);
-            border: none;
-            padding: 12px 24px;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 25px rgba(15,23,42,0.3);
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .dl-btn:hover {
-            background: var(--gold);
-            color: var(--navy);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(212,168,83,0.35);
-        }
-
-        .dl-menu {
-            display: none;
-            position: absolute;
-            bottom: 56px;
-            right: 0;
-            background: var(--white);
-            border: 1px solid var(--pearl);
-            border-radius: 10px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-            min-width: 180px;
-            overflow: hidden;
-        }
-
-        .dl-menu.show {
-            display: block;
-            animation: slideUp 0.2s ease;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .dl-menu button {
-            width: 100%;
-            padding: 12px 18px;
-            border: none;
-            background: transparent;
-            text-align: left;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            color: var(--slate);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.15s;
-        }
-
-        .dl-menu button:hover {
-            background: var(--pearl);
-        }
-
-        .dl-menu button:not(:last-child) {
-            border-bottom: 1px solid var(--pearl);
-        }
-
-        /* ═══ RESPONSIVE ═══ */
-        @media (max-width: 768px) {
-            body { background: var(--white); }
-            .page {
-                flex-direction: column;
-                margin: 0;
-                box-shadow: none;
-                min-height: auto;
-            }
-            .sidebar {
-                width: 100%;
-                padding: 30px 24px;
-            }
-            .main {
-                padding: 28px 24px;
-            }
-            .exp-header {
-                flex-direction: column;
-            }
-            .edu-item {
-                flex-direction: column;
-                gap: 2px;
-            }
-            .back-btn {
-                top: 12px;
-                left: 12px;
-                padding: 10px 16px;
-                font-size: 12px;
-            }
-            .download-float {
-                bottom: 20px;
-                right: 20px;
-            }
-        }
-
-        @media print {
-            body { background: white; }
-            .page {
-                box-shadow: none;
-                margin: 0;
-                min-height: auto;
-            }
-            .back-btn { display: none !important; }
-            .download-float { display: none !important; }
-            .skill-tag:hover, .cert-item:hover { transform: none; }
-        }
-
-        /* PDF Export - prevent page breaks */
-        .pdf-export {
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-        .pdf-export .sidebar,
-        .pdf-export .main {
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-        .pdf-export .main-section {
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css?v=20260923">
+    <link rel="stylesheet" href="css/custom-select.css">
+    <link rel="stylesheet" href="css/hero-new.css?v=20260828">
+    <link rel="stylesheet" href="css/mobile-fix.css?v=20260922">
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <noscript>
+        <style>
+            .js-only { display: none !important; }
+        </style>
+    </noscript>
 </head>
 <body>
-    <div class="page" id="cv-content">
 
-        <!-- ═══ SIDEBAR ═══ -->
-        <aside class="sidebar">
-            <div class="sidebar-name">Amin Saadati</div>
-            <div class="sidebar-title">Network Specialist</div>
-
-            <!-- Contact -->
-            <div class="sidebar-section">
-                <div class="sidebar-label">Contact</div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <span>Mashhad, Iran</span>
-                </div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                    <span>+98 999 971 8581</span>
-                </div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <a href="mailto:amin.saadati5195@gmail.com">amin.saadati5195@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                    <a href="https://github.com/AminSaadatiIT" target="_blank">GitHub</a>
-                </div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                    <a href="https://www.linkedin.com/in/amin-saadati-it/" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-                    <a href="https://aminsaadatiit.github.io/portfolio/" target="_blank">Portfolio</a>
-                </div>
-            </div>
-
-            <!-- Technical Skills -->
-            <div class="sidebar-section">
-                <div class="sidebar-label">Technical Skills</div>
-                <div class="skill-group-title">Networking</div>
-                <span class="skill-tag">Cisco</span>
-                <span class="skill-tag">MikroTik</span>
-                <span class="skill-tag">VLANs</span>
-                <span class="skill-tag">WAN</span>
-                <span class="skill-tag">Firewall</span>
-                <div class="skill-group-title">Infrastructure</div>
-                <span class="skill-tag">Structured Cabling</span>
-                
-                <span class="skill-tag">Server Room</span>
-                <span class="skill-tag">CCTV</span>
-                <div class="skill-group-title">Systems</div>
-                <span class="skill-tag">Windows Server</span>
-                <span class="skill-tag">Active Directory</span>
-                <span class="skill-tag">VMware</span>
-                <span class="skill-tag">Hyper-V</span>
-                <span class="skill-tag">IIS</span>
-                <div class="skill-group-title">Programming</div>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">SQL</span>
-                <span class="skill-tag">Arduino</span>
-            </div>
-
-            <!-- Soft Skills -->
-            <div class="sidebar-section">
-                <div class="sidebar-label">Soft Skills</div>
-                <span class="skill-tag">Team Leadership</span>
-                <span class="skill-tag">Client Communication</span>
-                <span class="skill-tag">Problem Solving</span>
-                <span class="skill-tag">Technical Documentation</span>
-                <span class="skill-tag">Event Management</span>
-            </div>
-
-            <!-- Languages -->
-            <div class="sidebar-section">
-                <div class="sidebar-label">Languages</div>
-                <div class="lang-item">
-                    <span>English</span>
-                    <div class="lang-bar"><div class="lang-fill" style="width:85%"></div></div>
-                </div>
-                <div class="lang-item">
-                    <span>Persian</span>
-                    <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- ═══ MAIN CONTENT ═══ -->
-        <main class="main">
-
-            <!-- Professional Summary -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    Professional Summary
-                </div>
-                <p class="summary-text">
-                    Results-driven <strong>Network & IT Infrastructure Specialist</strong> with <strong>2+ years</strong> of hands-on experience managing enterprise-grade systems for <strong>150+ users</strong>. Proven track record in <strong>network administration, CCTV deployment, help desk operations</strong>, and technical event support. Currently completing a <strong>Bachelor's degree in Network Engineering</strong> while delivering real-world IT solutions in hospitality and corporate environments. Known for <strong>efficiency under pressure</strong> — managing full IT operations with a team of just <strong>3 people</strong>, achieving <strong>95%+ same-day resolution rate</strong>, and maintaining <strong>zero critical system failures</strong> over 18 months.
-                </p>
-            </div>
-
-            <!-- Career Objective -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Career Objective
-                </div>
-                <p class="summary-text">
-                    Seeking a challenging position as a <strong>Network Engineer</strong> or <strong>IT Infrastructure Specialist</strong> where I can leverage my hands-on experience in enterprise network management, system administration, and technical support to contribute to organizational success. Committed to continuous professional development and obtaining advanced certifications in <strong>Cisco</strong> and <strong>cloud technologies</strong>.
-                </p>
-            </div>
-
-            <!-- Work Experience -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-                    Work Experience
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-role">Network & IT Specialist</span>
-                        <span class="exp-date">Feb 2024 — Present</span>
-                    </div>
-                    <div class="exp-company">Negin Rose Khorasan (Diplomat Hotel) · Khorasan Razavi, Iran</div>
-                    <ul class="exp-list">
-                        <li>Managed full IT infrastructure for <strong>150+ employees</strong> with a lean team of only <strong>3 people</strong>, reducing operational costs by <strong>25%</strong></li>
-                        <li>Installed and maintained <strong>CCTV surveillance systems</strong> across 5 buildings with <strong>120+ IP cameras</strong></li>
-                        <li>Provided daily <strong>help desk support</strong> with <strong>95%+ same-day resolution rate</strong>, maintaining user satisfaction score of <strong>4.8/5.0</strong></li>
-                        <li>Delivered <strong>technical preparation and live support</strong> for <strong>20+ conferences and events</strong> with zero technical failures</li>
-                        <li>Implemented <strong>network monitoring system</strong> that reduced downtime by <strong>40%</strong> and improved response time by <strong>60%</strong></li>
-                    </ul>
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-role">Digital Marketing Intern</span>
-                        <span class="exp-date">8-Month Internship</span>
-                    </div>
-                    <div class="exp-company">Haghighi Rojaneh Tos</div>
-                    <ul class="exp-list">
-                        <li>Executed <strong>SEO strategies</strong> that improved organic traffic by <strong>45%</strong> for client websites</li>
-                        <li>Managed <strong>digital marketing campaigns</strong> across 5+ channels with <strong>3.2x ROI</strong></li>
-                        <li>Analyzed <strong>campaign performance metrics</strong> and optimized strategies, reducing cost-per-acquisition by <strong>28%</strong></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Education -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
-                    Education
-                </div>
-                <div class="edu-item">
-                    <div>
-                        <div class="edu-degree">Bachelor's Degree in Network Engineering</div>
-                        <div class="edu-school">Islamic Azad University, Iran</div>
-                    </div>
-                    <span class="edu-date">Sep 2022 — Present</span>
-                </div>
-            </div>
-
-            <!-- Certifications -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                    Certifications & Courses
-                </div>
-
-                <div class="cert-item">
-                    <div class="cert-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="cert-info">
-                        <div class="cert-name">CCNA — Cisco Certified Network Associate</div>
-                        <div class="cert-detail">Cisco Systems · Valid Credential</div>
-                    </div>
-                </div>
-
-                <div class="cert-item">
-                    <div class="cert-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="cert-info">
-                        <div class="cert-name">MTCNA — MikroTik Certified Network Associate</div>
-                        <div class="cert-detail">MikroTik · Valid Credential</div>
-                    </div>
-                </div>
-
-                <div class="cert-item">
-                    <div class="cert-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="cert-info">
-                        <div class="cert-name">Advanced English — Iran Language Institute</div>
-                        <div class="cert-detail">Rating: Outstanding · Issued Jul 2024</div>
-                    </div>
-                    <a href="images/certificate-english.jpg" target="_blank" class="cert-link">View →</a>
-                </div>
-
-                <div class="cert-item">
-                    <div class="cert-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="cert-info">
-                        <div class="cert-name">IT Support & Help Desk</div>
-                        <div class="cert-detail">Maktabkhooneh Online Platform</div>
-                    </div>
-                </div>
-
-                <div class="cert-item">
-                    <div class="cert-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    </div>
-                    <div class="cert-info">
-                        <div class="cert-name">IELTS Preparation</div>
-                        <div class="cert-detail">Currently in progress · Target: B2+</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Key Achievements -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    Key Achievements
-                </div>
-                <ul class="exp-list">
-                    <li><strong>Cost Optimization:</strong> Reduced IT operational costs by <strong>25%</strong> through strategic vendor negotiations and resource optimization</li>
-                    <li><strong>System Uptime:</strong> Maintained <strong>99.5% system availability</strong> across all critical infrastructure for 18 consecutive months</li>
-                    <li><strong>Team Efficiency:</strong> Managed complete IT operations with a team of <strong>3 people</strong>, handling workload typically requiring 5-6 staff</li>
-                    <li><strong>Process Improvement:</strong> Implemented automated ticketing system that improved response time by <strong>60%</strong> and user satisfaction by <strong>35%</strong></li>
-                </ul>
-            </div>
-
-            <!-- Key Projects -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    Key Projects
-                </div>
-                <ul class="exp-list">
-                    <li><strong>Enterprise IT Infrastructure:</strong> Designed and deployed complete network infrastructure for 150+ users, including structured cabling, server room setup, and active directory configuration — reducing setup time by <strong>30%</strong></li>
-                    <li><strong>CCTV Surveillance System:</strong> Installed and configured <strong>120+ IP cameras</strong> across 5 buildings with centralized NVR monitoring, achieving <strong>100% coverage</strong> with <strong>99.9% uptime</strong></li>
-                    <li><strong>Event Technical Support:</strong> Provided live technical support for <strong>20+ corporate events</strong> and conferences, ensuring <strong>zero technical failures</strong> and receiving <strong>positive feedback from 98%</strong> of participants</li>
-                </ul>
-            </div>
-
-            <!-- References -->
-            <div class="main-section">
-                <div class="section-title">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    References
-                </div>
-                <div class="ref-item">
-                    <div class="ref-name">Dr. Mahdi Zolfaghari</div>
-                    <div class="ref-role">Director, Iran Language Institute</div>
-                </div>
-                <div class="ref-item">
-                    <div class="ref-name">Dr. Asgari</div>
-                    <div class="ref-role">Faculty Member, Islamic Azad University</div>
-                </div>
-            </div>
-
-        </main>
+    <div class="scroll-progress" role="progressbar" aria-label="Scroll progress">
+        <div class="scroll-bar" id="scrollBar"></div>
     </div>
 
-    <!-- Back to Portfolio Button -->
-    <a href="https://aminsaadatiit.github.io/portfolio/" class="back-btn" title="Back to Portfolio">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Portfolio</span>
-    </a>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-    <!-- Download Button -->
-    <div class="download-float">
-        <button class="dl-btn" onclick="toggleDlMenu()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            Download
-        </button>
-        <div class="dl-menu" id="dlMenu">
-            <button onclick="downloadAs('pdf')">📄 PDF Document</button>
-            <button onclick="downloadAs('word')">📝 Word (.docx)</button>
+    <div class="aurora" id="aurora" aria-hidden="true">
+        <div class="aurora-grid" id="auroraGrid"></div>
+        <div class="aurora-orb orb-1" id="orb1"></div>
+        <div class="aurora-orb orb-2" id="orb2"></div>
+        <div class="aurora-orb orb-3" id="orb3"></div>
+        <div class="aurora-orb orb-4" id="orb4"></div>
+        <div class="aurora-orb orb-5" id="orb5"></div>
+        <div class="aurora-particles" id="particles"></div>
+        <div class="aurora-noise"></div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="header-inner container">
+            <a href="admin.html?login" class="logo" title="Admin Panel">
+                <div class="logo-anim-wrap">
+                    <!-- Ghost guide (faint, always visible) -->
+                    <img src="images/logo.png" alt="" class="logo-img logo-ghost" aria-hidden="true">
+                    <!-- Part 1: Triangle drops from top -->
+                    <img src="images/logo.png" alt="" class="logo-img logo-layer logo-p1" aria-hidden="true">
+                    <!-- Part 2: Inner A scales in -->
+                    <img src="images/logo.png" alt="" class="logo-img logo-layer logo-p2" aria-hidden="true">
+                    <!-- Part 3: S slides from right -->
+                    <img src="images/logo.png" alt="" class="logo-img logo-layer logo-p3" aria-hidden="true">
+                    <!-- Final assembled logo -->
+                    <img src="images/logo.png" alt="Amin Saadati Logo" class="logo-img logo-final">
+                </div>
+                <span class="logo-text">Amin Saadati</span>
+            </a>
+
+            <nav class="nav" id="mainNav" aria-label="Main navigation">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#contact" class="btn-hire">Hire Me</a>
+
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
+                    <span class="hamburger">
+                        <span></span><span></span><span></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero-new" id="home">
+            <div class="hero-bg"></div>
+            
+            <!-- Hero Left Content -->
+            <div class="hero-left">
+                <!-- Name & Title Badge -->
+                <div class="hero-badge-intro">
+                    <span class="hero-name">Amin Saadati</span>
+                    <span class="hero-divider">|</span>
+                    <span class="hero-role">Network Infrastructure Specialist</span>
+                    <span class="hero-divider">|</span>
+                    <span class="hero-status"><span class="status-dot"></span> Available for hire</span>
+                </div>
+                
+                <h1 class="hero-heading" id="heroHeading">
+                    <span class="hero-heading-primary">Network Infrastructure</span>
+                    <span class="hero-heading-accent">Built with Precision</span>
+                </h1>
+                
+                <p class="hero-subtitle">Helping businesses build reliable network infrastructure and security systems. From structured cabling to CCTV and fiber optics — delivering end-to-end solutions across Iran.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">35+</span>
+                        <span class="stat-label">Clients</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Years</span>
+                    </div>
+                </div>
+                
+                <div class="hero-cta-group" id="heroCtaGroup">
+                    <a href="#projects" class="btn-primary">
+                        View My Work
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        Contact Me
+                    </a>
+                    <a href="https://github.com/aminsaadatiit/resume-cv" target="_blank" class="btn-outline" id="downloadResume">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hero Right — Circles Visualization -->
+            <div class="hero-right">
+                <div class="circles-container">
+                    <!-- Orbit 4 (outermost) -->
+                    <div class="orbit orbit-4">
+                        <div class="orbit-ring"></div>
+                        <div class="avatar avatar-orbit4-1" style="--angle: 30deg; --radius: 399px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                <span>Server</span>
+                            </div>
+                        </div>
+                        <div class="avatar avatar-orbit4-2" style="--angle: 95deg; --radius: 399px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                                <span>Router</span>
+                            </div>
+                        </div>
+                        <div class="avatar avatar-orbit4-3" style="--angle: 220deg; --radius: 399px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <span>Security</span>
+                            </div>
+                        </div>
+                        <div class="avatar avatar-orbit4-4" style="--angle: 320deg; --radius: 399px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                                <span>CCTV</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Orbit 3 -->
+                    <div class="orbit orbit-3">
+                        <div class="orbit-ring"></div>
+                        <div class="avatar avatar-orbit3-1" style="--angle: 130deg; --radius: 325px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                                <span>Fiber</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Orbit 2 -->
+                    <div class="orbit orbit-2">
+                        <div class="orbit-ring"></div>
+                        <div class="avatar avatar-orbit2-1" style="--angle: 60deg; --radius: 251px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5v14"/><circle cx="12" cy="12" r="10"/></svg>
+                                <span>Network</span>
+                            </div>
+                        </div>
+                        <div class="avatar avatar-orbit2-2" style="--angle: 180deg; --radius: 251px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+                                <span>Switch</span>
+                            </div>
+                        </div>
+                        <div class="avatar avatar-orbit2-3" style="--angle: 300deg; --radius: 251px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Orbit 1 (innermost) -->
+                    <div class="orbit orbit-1">
+                        <div class="orbit-ring"></div>
+                        <div class="avatar avatar-orbit1-1" style="--angle: 270deg; --radius: 177px;">
+                            <div class="network-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                <span>Passive</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Center -->
+                    <div class="orbit-center">
+                        <span class="orbit-number" id="orbitCounter">0</span>
+                        <span class="orbit-label">Projects Done</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <span>Scroll Down</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </div>
+
+        </section>
+
+        <!-- ABOUT — Premium Glass Design -->
+        <section class="section about-section expand-target" id="about">
+            <div class="about-bg-glow"></div>
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">About</span>
+                    <h2 class="section-title">About Me</h2>
+                </div>
+
+                <div class="about-premium">
+                    <!-- Profile Card with Photo -->
+                    <div class="about-profile-card reveal">
+                        <div class="profile-photo-container">
+                            <img src="images/profile.png" alt="Amin Saadati" class="profile-photo">
+                            <div class="profile-photo-overlay"></div>
+                            <div class="profile-badge">
+                                <span class="badge-dot"></span>
+                                <span>Available for Hire</span>
+                            </div>
+                            <div class="profile-floating-content">
+                                <div class="profile-floating-text">
+                                    <h3 class="profile-name">Amin Saadati</h3>
+                                    <p class="profile-title">Network Infrastructure & Security Expert</p>
+                                    <div class="profile-socials">
+                                        <a href="https://github.com/AminSaadatiIT" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/aminsaadati" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                        </a>
+                                        <a href="https://t.me/AminSaadati" target="_blank" rel="noopener" class="social-link" aria-label="Telegram">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .126 4.086l3.9 1.2 1.8 5.7a1.5 1.5 0 0 0 2.4 0l2.5-3.1 4.2 3.1a2.25 2.25 0 0 0 3.5-1.7v-1.5l-4.5-2.2a1.125 1.125 0 0 1 0-2.04l8-3.6a2.25 2.25 0 0 0 1.25-2.06V4.44a2.25 2.25 0 0 0-2.31-2.007z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info Side -->
+                    <div class="about-info-side">
+                        <p class="about-bio-premium reveal">
+                            I'm a specialist in designing and implementing <span class="text-gradient">network infrastructure</span> and <span class="text-gradient">security systems</span>. With over 5 years of hands-on experience, I've completed 50+ projects across Iran — from structured cabling and fiber optic installations to CCTV surveillance and access control systems.
+                        </p>
+                        <p class="about-bio-premium reveal" style="margin-top:12px;">
+                            <strong>Core expertise:</strong> Structured Cabling (Cat5e/Cat6/Cat6a) • Fiber Optic (Single-mode & Multi-mode) • CCTV & IP Surveillance • Access Control Systems • Server Room Design • MikroTik & Cisco Networking • Cable Management & Documentation.
+                        </p>
+                        <p class="about-bio-premium reveal" style="margin-top:12px;">
+                            <strong>Certifications:</strong> Cisco CCNA • MikroTik MTCNA • Fiber Optic Technician.
+                        </p>
+
+                        <div class="about-glass-grid reveal">
+                            <div class="glass-card">
+                                <div class="glass-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                </div>
+                                <div class="glass-card-content">
+                                    <span class="glass-card-label">Name</span>
+                                    <span class="glass-card-value">Amin Saadati</span>
+                                </div>
+                            </div>
+                            <div class="glass-card">
+                                <div class="glass-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                                </div>
+                                <div class="glass-card-content">
+                                    <span class="glass-card-label">Email</span>
+                                    <a href="mailto:amin.saadati5195@gmail.com" class="glass-card-value link-glow">amin.saadati5195@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="glass-card">
+                                <div class="glass-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </div>
+                                <div class="glass-card-content">
+                                    <span class="glass-card-label">Location</span>
+                                    <span class="glass-card-value">Mashhad, Iran</span>
+                                </div>
+                            </div>
+                            <div class="glass-card">
+                                <div class="glass-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <div class="glass-card-content">
+                                    <span class="glass-card-label">Phone</span>
+                                    <a href="tel:+989999718581" class="glass-card-value link-glow">+98 999-971-8581</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-stats reveal">
+                            <div class="stat-glass">
+                                <span class="stat-number" data-count="50">0</span>
+                                <span class="stat-plus">+</span>
+                                <span class="stat-label">Projects Done</span>
+                            </div>
+                            <div class="stat-glass">
+                                <span class="stat-number" data-count="30">0</span>
+                                <span class="stat-plus">+</span>
+                                <span class="stat-label">Happy Clients</span>
+                            </div>
+                            <div class="stat-glass">
+                                <span class="stat-number" data-count="5">0</span>
+                                <span class="stat-plus">+</span>
+                                <span class="stat-label">Years Experience</span>
+                            </div>
+                        </div>
+
+                        <a href="#contact" class="btn-glass reveal">
+                            <span>Contact Me</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section class="section" id="certifications">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Credentials</span>
+                    <h2 class="section-title">Certifications & Why Me</h2>
+                </div>
+                <div class="certs-uvp-grid reveal">
+                    <div class="cert-card">
+                        <div class="cert-badge-icon">🏅</div>
+                        <h3 class="cert-name">Cisco CCNA</h3>
+                        <p class="cert-desc">Routing & Switching — Enterprise Network Design</p>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-badge-icon">📡</div>
+                        <h3 class="cert-name">MikroTik MTCNA</h3>
+                        <p class="cert-desc">RouterOS Certified Network Associate</p>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-badge-icon">🔌</div>
+                        <h3 class="cert-name">Fiber Optic Tech</h3>
+                        <p class="cert-desc">Fusion Splicing, OTDR Testing & Certification</p>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-badge-icon">🛡️</div>
+                        <h3 class="cert-name">Security+ Ready</h3>
+                        <p class="cert-desc">Physical Security & Access Control Systems</p>
+                    </div>
+                </div>
+
+                <div class="uvp-section reveal" style="margin-top:48px;">
+                    <h3 class="uvp-title">Why Choose Me?</h3>
+                    <div class="uvp-grid">
+                        <div class="uvp-card">
+                            <span class="uvp-icon">⚡</span>
+                            <h4>End-to-End Delivery</h4>
+                            <p>From design to testing and documentation — one person, one vision, zero miscommunication.</p>
+                        </div>
+                        <div class="uvp-card">
+                            <span class="uvp-icon">📊</span>
+                            <h4>Measurable Results</h4>
+                            <p>Every project comes with OTDR reports, cable certification logs, and performance benchmarks.</p>
+                        </div>
+                        <div class="uvp-card">
+                            <span class="uvp-icon">🏆</span>
+                            <h4>50+ Projects, Zero Callbacks</h4>
+                            <p>My work speaks for itself — structured, documented, and built to last decades.</p>
+                        </div>
+                        <div class="uvp-card">
+                            <span class="uvp-icon">🇮🇷</span>
+                            <h4>Local Expertise</h4>
+                            <p>Deep knowledge of Iran's infrastructure landscape, regulations, and supplier ecosystem.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Services</span>
+                    <h2 class="section-title">What I Do</h2>
+                    <p class="section-desc">End-to-end network and security solutions — from survey to certification.</p>
+                </div>
+                <div class="services-grid reveal">
+                    <div class="service-card">
+                        <span class="service-icon">🔌</span>
+                        <h3>Structured Cabling</h3>
+                        <p>Cat5e/Cat6/Cat6A design & installation to TIA-568 standard, fully tested and certified with link reports.</p>
+                        <ul class="service-list">
+                            <li>Site survey & design</li>
+                            <li>Cable certification report</li>
+                            <li>Labeling & documentation</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">📹</span>
+                        <h3>CCTV & IP Surveillance</h3>
+                        <p>Complete camera systems from 4 to 500+ channels with NVR, remote access, and 24/7 recording.</p>
+                        <ul class="service-list">
+                            <li>Camera layout design</li>
+                            <li>NVR & storage sizing</li>
+                            <li>Mobile remote access</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🧵</span>
+                        <h3>Fiber Optic Solutions</h3>
+                        <p>Single-mode & multi-mode backbone installation with fusion splicing and OTDR-certified links.</p>
+                        <ul class="service-list">
+                            <li>Fusion splicing</li>
+                            <li>ODF termination</li>
+                            <li>OTDR test reports</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🔐</span>
+                        <h3>Access Control</h3>
+                        <p>Card, PIN, and biometric entry systems with central management and full audit trails.</p>
+                        <ul class="service-list">
+                            <li>Biometric & card readers</li>
+                            <li>Door controllers</li>
+                            <li>Audit & reporting</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🖥️</span>
+                        <h3>Server Room Build</h3>
+                        <p>Standard rack rooms: racks, UPS, cooling, cable management, and environmental monitoring.</p>
+                        <ul class="service-list">
+                            <li>Rack & power layout</li>
+                            <li>UPS & cooling sizing</li>
+                            <li>Environmental monitoring</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">📡</span>
+                        <h3>Network Consulting</h3>
+                        <p>MikroTik & Cisco design, troubleshooting, and optimization for offices, hotels, and factories.</p>
+                        <ul class="service-list">
+                            <li>Network design & audit</li>
+                            <li>Wi-Fi coverage planning</li>
+                            <li>Performance tuning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="section" id="process">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Process</span>
+                    <h2 class="section-title">How We Work Together</h2>
+                    <p class="section-desc">A clear, predictable path from first call to signed-off delivery.</p>
+                </div>
+                <div class="process-steps reveal">
+                    <div class="process-step">
+                        <span class="step-num">1</span>
+                        <h3>Free Consultation</h3>
+                        <p>Call or message — I assess your needs and answer within 24 hours.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">2</span>
+                        <h3>Survey & Quote</h3>
+                        <p>On-site survey, transparent itemized quote, no hidden costs.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">3</span>
+                        <h3>Execution</h3>
+                        <p>Clean installation on schedule with daily progress updates.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">4</span>
+                        <h3>Test & Handover</h3>
+                        <p>Full test reports, documentation, and post-delivery support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="section expand-target" id="skills">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Skills</span>
+                    <h2 class="section-title">Skills</h2>
+                </div>
+                <div class="skills-groups reveal-stagger" id="skillsContainer"></div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="section expand-target" id="projects">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Projects</span>
+                    <h2 class="section-title">Projects</h2>
+                </div>
+
+                <div class="filter-bar reveal">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="cabling">Cabling</button>
+                    <button class="filter-btn" data-filter="cctv">CCTV</button>
+                    <button class="filter-btn" data-filter="rack">Rack</button>
+                    <button class="filter-btn" data-filter="fiber">Fiber</button>
+                    <button class="filter-btn" data-filter="security">Security</button>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid"></div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section class="section expand-target" id="experience">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Experience</span>
+                    <h2 class="section-title">Work Experience</h2>
+                </div>
+                <div class="timeline reveal" id="timelineContainer"></div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="section" id="testimonials">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Reviews</span>
+                    <h2 class="section-title">Client Reviews</h2>
+                    <p class="section-desc">What people I've worked with have to say.</p>
+                </div>
+
+                <div class="testimonials-slider reveal" id="testimonialsSlider">
+                    <div class="slider-track" id="sliderTrack"></div>
+                    <div class="slider-controls">
+                        <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Previous">‹</button>
+                        <div class="slider-dots" id="sliderDots"></div>
+                        <button class="slider-btn slider-next" id="sliderNext" aria-label="Next">›</button>
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin-top:40px;" class="reveal">
+                    <button class="btn btn-outline" id="openReviewFormBtn">
+                        ✍️ Leave a Review
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" id="faq">
+            <div class="container container-narrow">
+                <div class="section-header reveal">
+                    <span class="section-label">FAQ</span>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-list reveal">
+                    <details class="faq-item">
+                        <summary>How fast do you respond to inquiries?</summary>
+                        <div class="faq-answer">I reply to all messages within 24 hours — usually much faster during business hours. For urgent projects, call directly.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Do you work outside Mashhad?</summary>
+                        <div class="faq-answer">Yes. I've delivered projects across Iran including Tehran, Isfahan, and Ahvaz. Travel costs are included transparently in the quote.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Do you provide documentation and test reports?</summary>
+                        <div class="faq-answer">Always. Every cabling link is certified with printed reports, fiber links come with OTDR traces, and you receive full as-built documentation.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What happens after delivery? Is there support?</summary>
+                        <div class="faq-answer">Yes — every project includes a support period. If anything related to my installation fails, I fix it. That's why my callback rate is effectively zero.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can you work with our existing contractor or IT team?</summary>
+                        <div class="faq-answer">Absolutely. I regularly collaborate with in-house IT teams and other contractors — clear scope division keeps everything smooth.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section expand-target" id="contact">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Contact</span>
+                    <h2 class="section-title">Get in Touch</h2>
+                </div>
+
+                <div class="response-promise reveal">
+                    <span class="promise-icon">⚡</span>
+                    <span>I reply to every message within <strong>24 hours</strong> — or call <a href="tel:+989999718581">+98 999-971-8581</a> directly.</span>
+                </div>
+
+                <div class="contact-grid">
+                    <form class="contact-form reveal" id="contactForm" novalidate>
+                        <h3 class="form-title">Contact Form</h3>
+                        <div class="form-group">
+                            <label for="contactName" class="form-label">Full Name *</label>
+                            <input type="text" id="contactName" name="name" class="form-input" required minlength="2">
+                            <span class="form-error" id="contactNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail" class="form-label">Email *</label>
+                            <input type="email" id="contactEmail" name="email" class="form-input" required>
+                            <span class="form-error" id="contactEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactCompany" class="form-label">Company</label>
+                            <input type="text" id="contactCompany" name="company" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Service Needed *</label>
+                            <div class="custom-select" data-name="service" data-required="true">
+                                <div class="custom-select-trigger placeholder">Select a service...</div>
+                                <span class="custom-select-arrow">▼</span>
+                                <div class="custom-select-dropdown">
+                                    <div class="custom-select-option disabled" data-value="">Select a service...</div>
+                                    <div class="custom-select-option" data-value="Network Infrastructure">Network Infrastructure</div>
+                                    <div class="custom-select-option" data-value="CCTV & Security Systems">CCTV & Security Systems</div>
+                                    <div class="custom-select-option" data-value="Fiber Optic Installation">Fiber Optic Installation</div>
+                                    <div class="custom-select-option" data-value="Security Consulting">Security Consulting</div>
+                                    <div class="custom-select-option" data-value="Other">Other</div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="service" class="custom-select-value">
+                            <span class="form-error" id="contactServiceError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject" class="form-label">Subject *</label>
+                            <input type="text" id="contactSubject" name="subject" class="form-input" required minlength="3">
+                            <span class="form-error" id="contactSubjectError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage" class="form-label">Message *</label>
+                            <textarea id="contactMessage" name="message" class="form-input form-textarea" required minlength="10" rows="5"></textarea>
+                            <span class="form-error" id="contactMessageError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+
+                    <form class="contact-form reveal" id="hireForm" novalidate>
+                        <h3 class="form-title">Hire Me</h3>
+                        <div class="form-group">
+                            <label for="hireName" class="form-label">Name *</label>
+                            <input type="text" id="hireName" name="name" class="form-input" required minlength="2">
+                            <span class="form-error" id="hireNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hireEmail" class="form-label">Email *</label>
+                            <input type="email" id="hireEmail" name="email" class="form-input" required>
+                            <span class="form-error" id="hireEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hireCompany" class="form-label">Company</label>
+                            <input type="text" id="hireCompany" name="company" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Service Needed *</label>
+                            <div class="custom-select" data-name="service" data-required="true">
+                                <div class="custom-select-trigger placeholder">Select a service...</div>
+                                <span class="custom-select-arrow">▼</span>
+                                <div class="custom-select-dropdown">
+                                    <div class="custom-select-option disabled" data-value="">Select a service...</div>
+                                    <div class="custom-select-option" data-value="Network Infrastructure">Network Infrastructure</div>
+                                    <div class="custom-select-option" data-value="CCTV & Security Systems">CCTV & Security Systems</div>
+                                    <div class="custom-select-option" data-value="Fiber Optic Installation">Fiber Optic Installation</div>
+                                    <div class="custom-select-option" data-value="Security Consulting">Security Consulting</div>
+                                    <div class="custom-select-option" data-value="Other">Other</div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="service" class="custom-select-value">
+                            <span class="form-error" id="hireServiceError"></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hireBudget" class="form-label">Budget Range</label>
+                                <select id="hireBudget" name="budget" class="form-input form-select">
+                                    <option value="">Select…</option>
+                                    <option>Under 50M Toman</option>
+                                    <option>50M – 150M Toman</option>
+                                    <option>150M – 500M Toman</option>
+                                    <option>500M+ Toman</option>
+                                    <option>Not sure yet</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hireTimeline" class="form-label">Timeline</label>
+                                <select id="hireTimeline" name="timeline" class="form-input form-select">
+                                    <option value="">Select…</option>
+                                    <option>ASAP / Urgent</option>
+                                    <option>Within 1 month</option>
+                                    <option>1–3 months</option>
+                                    <option>Flexible</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hireSubject" class="form-label">Subject *</label>
+                            <input type="text" id="hireSubject" name="subject" class="form-input" required minlength="3">
+                            <span class="form-error" id="hireSubjectError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hireDesc" class="form-label">Project Details *</label>
+                            <textarea id="hireDesc" name="message" class="form-input form-textarea" required minlength="20" rows="5"></textarea>
+                            <span class="form-error" id="hireDescError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="Amin Saadati Logo" class="footer-logo-img">
+                <div>
+                    <span class="footer-name">Amin Saadati</span>
+                    <span class="footer-title">Network Infrastructure & Security Specialist</span>
+                </div>
+            </div>
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#experience">Experience</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:amin.saadati5195@gmail.com">amin.saadati5195@gmail.com</a>
+                    <a href="tel:+989999718581">+98 999-971-8581</a>
+                    <span>Mashhad, Iran</span>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <a href="https://github.com/AminSaadatiIT" target="_blank" rel="noopener">GitHub</a>                        <a href="https://www.linkedin.com/in/aminsaadati" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://t.me/AminSaadati" target="_blank" rel="noopener">Telegram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copy">© <span id="footerYear"></span> Amin Saadati. All rights reserved.</p>
+                <p class="footer-credit">Designed & Built with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="projectModal" role="dialog" aria-modal="true" hidden>
+        <div class="modal">
+            <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+            <div class="modal-gallery" id="modalGallery"></div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-meta" id="modalMeta"></div>
+                <div class="modal-desc" id="modalDesc"></div>
+                <div class="modal-tags" id="modalTags"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Review Submission Modal -->
+    <div class="modal-overlay" id="reviewModal" role="dialog" aria-modal="true" hidden>
+        <div class="modal" style="max-width:520px;">
+            <button class="modal-close" id="reviewClose" aria-label="Close">✕</button>
+            <div class="modal-body">
+                <h2 class="modal-title" style="margin-bottom:8px;">✍️ Leave a Review</h2>
+                <p style="color:var(--text-2);font-size:14px;margin-bottom:24px;">
+                    Your review will be displayed on the site after approval.
+                </p>
+
+                <form id="reviewForm" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="reviewName">Full Name *</label>
+                        <input type="text" id="reviewName" class="form-input" required minlength="2" maxlength="60">
+                        <span class="form-error" id="reviewNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reviewEmail">Email *</label>
+                        <input type="email" id="reviewEmail" class="form-input" required>
+                        <span class="form-error" id="reviewEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reviewRole">Role / Company</label>
+                        <input type="text" id="reviewRole" class="form-input" maxlength="100" placeholder="e.g. Tech Lead — Company X">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Rating *</label>
+                        <div class="star-rating-input" id="reviewStars" data-rating="5">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reviewText">Your Review *</label>
+                        <textarea id="reviewText" class="form-input form-textarea" required minlength="20" maxlength="500" rows="4"></textarea>
+                        <span class="form-error" id="reviewTextError"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        📤 Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Mobile CTA Bar -->
+    <div class="sticky-cta-bar" id="stickyCtaBar">
+        <a href="#contact" class="sticky-cta-btn sticky-cta-hire">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Hire Me
+        </a>
+        <a href="#contact" class="sticky-cta-btn sticky-cta-msg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            Message
+        </a>
+    </div>
+
+    <!-- Apply Admin Settings -->
+    <script>
+    (function() {
+        const s = JSON.parse(localStorage.getItem('portfolio_settings') || '{}');
+        if (!s._v) return;
+
+        // Hero Badge
+        if (s.badgeName) { const el = document.querySelector('.hero-name'); if (el) el.textContent = s.badgeName; }
+        if (s.badgeRole) { const el = document.querySelector('.hero-role'); if (el) el.textContent = s.badgeRole; }
+        if (s.badgeStatus) { const el = document.querySelector('.hero-status'); if (el) el.innerHTML = '<span class="status-dot"></span> ' + s.badgeStatus; }
+
+        // Hero Heading
+        if (s.heroTitle) { const el = document.querySelector('.hero-heading-primary'); if (el) el.textContent = s.heroTitle; }
+        if (s.heroAccent) { const el = document.querySelector('.hero-heading-accent'); if (el) el.textContent = s.heroAccent; }
+        if (s.heroDesc) { const el = document.querySelector('.hero-subtitle'); if (el) el.textContent = s.heroDesc; }
+
+        // Hero Stats
+        const statNums = document.querySelectorAll('.hero-stats .stat-number');
+        const statLabels = document.querySelectorAll('.hero-stats .stat-label');
+        if (s.statProjects && statNums[0]) statNums[0].textContent = s.statProjects;
+        if (s.statProjectsLabel && statLabels[0]) statLabels[0].textContent = s.statProjectsLabel;
+        if (s.statClients && statNums[1]) statNums[1].textContent = s.statClients;
+        if (s.statClientsLabel && statLabels[1]) statLabels[1].textContent = s.statClientsLabel;
+        if (s.statYears && statNums[2]) statNums[2].textContent = s.statYears;
+        if (s.statYearsLabel && statLabels[2]) statLabels[2].textContent = s.statYearsLabel;
+
+        // CTA Buttons
+        if (s.ctaPrimary) { const el = document.querySelector('.hero-cta-group .btn-primary'); if (el) el.innerHTML = s.ctaPrimary + ' <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'; }
+        if (s.ctaPrimaryLink) { const el = document.querySelector('.hero-cta-group .btn-primary'); if (el) el.href = s.ctaPrimaryLink; }
+        if (s.ctaSecondary) { const el = document.querySelector('.hero-cta-group .btn-secondary'); if (el) el.textContent = s.ctaSecondary; }
+        if (s.ctaSecondaryLink) { const el = document.querySelector('.hero-cta-group .btn-secondary'); if (el) el.href = s.ctaSecondaryLink; }
+        if (s.ctaDownload) { const el = document.querySelector('.hero-cta-group .btn-outline'); if (el) { const svg = el.querySelector('svg'); el.textContent = ''; if (svg) el.appendChild(svg); el.appendChild(document.createTextNode(' ' + s.ctaDownload)); } }
+        if (s.ctaDownloadUrl) { const el = document.querySelector('.hero-cta-group .btn-outline'); if (el) el.href = s.ctaDownloadUrl; }
+
+        // About Section
+        if (s.aboutName) { const el = document.querySelector('.profile-name'); if (el) el.textContent = s.aboutName; }
+        if (s.aboutTitle) { const el = document.querySelector('.profile-title'); if (el) el.textContent = s.aboutTitle; }
+        if (s.aboutBio) { const el = document.querySelector('.about-bio-premium'); if (el) el.innerHTML = s.aboutBio.replace(/network infrastructure/gi, '<span class="text-gradient">network infrastructure</span>').replace(/security systems/gi, '<span class="text-gradient">security systems</span>'); }
+        if (s.aboutExpertise) { const el = document.querySelectorAll('.about-bio-premium')[1]; if (el) el.innerHTML = '<strong>Core expertise:</strong> ' + s.aboutExpertise; }
+        if (s.aboutCerts) { const el = document.querySelectorAll('.about-bio-premium')[2]; if (el) el.innerHTML = '<strong>Certifications:</strong> ' + s.aboutCerts; }
+
+        // About Glass Cards
+        const glassValues = document.querySelectorAll('.glass-card-value');
+        if (s.aboutName && glassValues[0]) glassValues[0].textContent = s.aboutName;
+        if (s.aboutEmail && glassValues[1]) { glassValues[1].textContent = s.aboutEmail; glassValues[1].href = 'mailto:' + s.aboutEmail; }
+        if (s.aboutLocation && glassValues[2]) glassValues[2].textContent = s.aboutLocation;
+        if (s.aboutPhone && glassValues[3]) { glassValues[3].textContent = s.aboutPhone; glassValues[3].href = 'tel:' + s.aboutPhone.replace(/\s/g, ''); }
+
+        // About Stats
+        const aboutStatNums = document.querySelectorAll('.about-stats .stat-number');
+        if (s.aboutProjects && aboutStatNums[0]) aboutStatNums[0].setAttribute('data-count', s.aboutProjects);
+        if (s.aboutClients && aboutStatNums[1]) aboutStatNums[1].setAttribute('data-count', s.aboutClients);
+        if (s.aboutYears && aboutStatNums[2]) aboutStatNums[2].setAttribute('data-count', s.aboutYears);
+
+        // Social Links
+        if (s.github) { const el = document.querySelector('a[aria-label="GitHub"]'); if (el) el.href = s.github; }
+        if (s.linkedin) { const el = document.querySelector('a[aria-label="LinkedIn"]'); if (el) el.href = s.linkedin; }
+        if (s.telegram) { const el = document.querySelector('a[aria-label="Telegram"]'); if (el) el.href = s.telegram; }
+
+        // Footer
+        if (s.footerName) { const el = document.querySelector('.footer-name'); if (el) el.textContent = s.footerName; }
+        if (s.footerTitle) { const el = document.querySelector('.footer-title'); if (el) el.textContent = s.footerTitle; }
+        if (s.footerCopy) { const el = document.querySelector('.footer-copy'); if (el) el.textContent = s.footerCopy; }
+        if (s.footerCredit) { const el = document.querySelector('.footer-credit'); if (el) el.textContent = s.footerCredit; }
+    })();
+    </script>
 
     <script>
-        function toggleDlMenu() {
-            document.getElementById('dlMenu').classList.toggle('show');
-        }
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.download-float')) {
-                document.getElementById('dlMenu').classList.remove('show');
-            }
-        });
-
-        function downloadAs(type) {
-            document.getElementById('dlMenu').classList.remove('show');
-            if (type === 'pdf') downloadPDF();
-            else if (type === 'word') downloadWord();
-        }
-
-        function downloadPDF() {
-            const el = document.getElementById('cv-content');
-            const btn = document.querySelector('.download-float');
-            btn.style.display = 'none';
-            
-            // Add print class to prevent page breaks
-            el.classList.add('pdf-export');
-            
-            html2pdf().set({
-                margin: [10, 10, 10, 10],
-                filename: 'Amin_Saadati_CV.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 2, 
-                    useCORS: true,
-                    logging: false,
-                    letterRendering: true
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'portrait'
-                },
-                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-            }).from(el).save().then(() => { 
-                btn.style.display = 'block'; 
-                el.classList.remove('pdf-export');
-            });
-        }function downloadWord() {
-            try {
-                const wordHtml = `
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns="http://www.w3.org/TR/REC-html40">
-<head>
-<meta charset="utf-8">
-<title>Amin Saadati - CV</title>
-<style>
-body { font-family: Calibri, sans-serif; font-size: 10.5pt; color: #334155; line-height: 1.4; margin: 0; padding: 15px; }
-table { border-collapse: collapse; width: 100%; }
-td { vertical-align: top; padding: 8px; }
-p { margin: 0 0 4px 0; }
-.name { font-size: 22pt; font-weight: bold; color: #0f172a; }
-.title { font-size: 11pt; color: #d4a853; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; }
-.contact { font-size: 9pt; color: #64748b; }
-.section-title { font-size: 11pt; font-weight: bold; color: #0f172a; border-bottom: 2px solid #d4a853; padding-bottom: 3px; margin: 12px 0 8px 0; text-transform: uppercase; letter-spacing: 1px; }
-.exp-role { font-weight: bold; color: #0f172a; }
-.exp-date { color: #2563eb; font-size: 9pt; }
-.exp-company { color: #64748b; font-size: 9.5pt; }
-.skill-label { color: #94a3b8; font-size: 8.5pt; margin: 6px 0 2px 0; }
-.skill-value { font-size: 9pt; }
-.cert-item { background: #f1f5f9; padding: 5px 8px; margin-bottom: 4px; font-size: 9.5pt; }
-ul { margin: 2px 0 4px 0; padding-left: 16px; }
-li { margin-bottom: 3px; font-size: 10pt; }
-strong { color: #0f172a; }
-</style>
-</head>
-<body>
-<table cellpadding="0" cellspacing="0" border="0">
-<tr>
-<td colspan="2" style="text-align:center;border-bottom:3px solid #d4a853;padding-bottom:10px;">
-<p class="name">Amin Saadati</p>
-<p class="title">Network & IT Infrastructure Specialist</p>
-<p class="contact">Mashhad, Iran &bull; +98 999 971 8581 &bull; amin.saadati5195@gmail.com<br>
-<a href="https://github.com/AminSaadatiIT">GitHub</a> &bull; <a href="https://www.linkedin.com/in/amin-saadati-it/">LinkedIn</a> &bull; <a href="https://aminsaadatiit.github.io/portfolio/">Portfolio</a></p>
-</td>
-</tr>
-<tr>
-<td style="width:35%;background:#0f172a;color:#cbd5e1;padding:15px;">
-<p style="color:#d4a853;font-weight:bold;font-size:9pt;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Technical Skills</p>
-<p class="skill-label">Networking</p>
-<p class="skill-value">Cisco, MikroTik, VLANs, WAN, Firewall</p>
-<p class="skill-label">Infrastructure</p>
-<p class="skill-value">Structured Cabling, Server Room, CCTV, Network Monitoring</p>
-<p class="skill-label">Systems</p>
-<p class="skill-value">Windows Server, Active Directory, VMware, Hyper-V, IIS</p>
-<p class="skill-label">Programming</p>
-<p class="skill-value">Python, C++, SQL, Arduino</p>
-
-<p style="color:#d4a853;font-weight:bold;font-size:9pt;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px 0;">Soft Skills</p>
-<p class="skill-value">Team Leadership, Client Communication, Problem Solving, Technical Documentation, Event Management</p>
-
-<p style="color:#d4a853;font-weight:bold;font-size:9pt;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px 0;">Languages</p>
-<p class="skill-value">English — Professional</p>
-<p class="skill-value">Persian — Native</p>
-</td>
-<td style="width:65%;padding:15px;">
-<p class="section-title">Professional Summary</p>
-<p>Results-driven <strong>Network & IT Infrastructure Specialist</strong> with <strong>2+ years</strong> of hands-on experience managing enterprise-grade systems for <strong>150+ users</strong>. Proven track record in <strong>network administration, CCTV deployment, help desk operations</strong>, and technical event support. Known for <strong>efficiency under pressure</strong> — managing full IT operations with a team of just <strong>3 people</strong>, achieving <strong>95%+ same-day resolution rate</strong>, and maintaining <strong>zero critical system failures</strong> over 18 months.</p>
-
-<p class="section-title">Career Objective</p>
-<p>Seeking a challenging position as a <strong>Network Engineer</strong> or <strong>IT Infrastructure Specialist</strong> where I can leverage my hands-on experience in enterprise network management, system administration, and technical support to contribute to organizational success.</p>
-
-<p class="section-title">Work Experience</p>
-<p><span class="exp-role">Network & IT Specialist</span> &nbsp; <span class="exp-date">Feb 2024 — Present</span></p>
-<p class="exp-company">Negin Rose Khorasan (Diplomat Hotel) &bull; Khorasan Razavi, Iran</p>
-<ul>
-<li>Managed full IT infrastructure for <strong>150+ employees</strong> with a lean team of only <strong>3 people</strong>, reducing operational costs by <strong>25%</strong></li>
-<li>Installed and maintained <strong>CCTV surveillance systems</strong> across 5 buildings with <strong>120+ IP cameras</strong></li>
-<li>Provided daily <strong>help desk support</strong> with <strong>95%+ same-day resolution rate</strong>, maintaining user satisfaction score of <strong>4.8/5.0</strong></li>
-<li>Delivered <strong>technical preparation and live support</strong> for <strong>20+ conferences and events</strong> with zero technical failures</li>
-<li>Implemented <strong>network monitoring system</strong> that reduced downtime by <strong>40%</strong> and improved response time by <strong>60%</strong></li>
-</ul>
-
-<p><span class="exp-role">Digital Marketing Intern</span> &nbsp; <span class="exp-date">8-Month Internship</span></p>
-<p class="exp-company">Haghighi Rojaneh Tos</p>
-<ul>
-<li>Executed <strong>SEO strategies</strong> that improved organic traffic by <strong>45%</strong> for client websites</li>
-<li>Managed <strong>digital marketing campaigns</strong> across 5+ channels with <strong>3.2x ROI</strong></li>
-<li>Analyzed <strong>campaign performance metrics</strong> and optimized strategies, reducing cost-per-acquisition by <strong>28%</strong></li>
-</ul>
-
-<p class="section-title">Education</p>
-<p><strong>Bachelor's Degree in Network Engineering</strong> — Islamic Azad University, Iran &bull; Sep 2022 — Present</p>
-
-<p class="section-title">Certifications & Courses</p>
-<div class="cert-item"><strong>CCNA</strong> — Cisco Certified Network Associate</div>
-<div class="cert-item"><strong>MTCNA</strong> — MikroTik Certified Network Associate</div>
-<div class="cert-item"><strong>Advanced English</strong> — Iran Language Institute (Outstanding)</div>
-<div class="cert-item"><strong>IT Support & Help Desk</strong> — Maktabkhooneh Online Platform</div>
-<div class="cert-item"><strong>IELTS Preparation</strong> — In Progress (Target: B2+)</div>
-
-<p class="section-title">Key Achievements</p>
-<ul>
-<li><strong>Cost Optimization:</strong> Reduced IT operational costs by <strong>25%</strong> through strategic vendor negotiations</li>
-<li><strong>System Uptime:</strong> Maintained <strong>99.5% system availability</strong> across all critical infrastructure for 18 months</li>
-<li><strong>Team Efficiency:</strong> Managed complete IT operations with team of 3, handling workload requiring 5-6 staff</li>
-<li><strong>Process Improvement:</strong> Implemented automated ticketing system, improving response time by <strong>60%</strong></li>
-</ul>
-
-<p class="section-title">References</p>
-<p><strong>Dr. Mahdi Zolfaghari</strong> — Director, Iran Language Institute</p>
-<p><strong>Dr. Asgari</strong> — Faculty Member, Islamic Azad University</p>
-</td>
-</tr>
-</table>
-</body>
-</html>`;
-
-                const blob = new Blob([wordHtml], { type: 'application/msword' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Amin_Saadati_CV.doc';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            } catch (err) {
-                console.error('Error generating Word:', err);
-                alert('Error generating Word document. Please try again.');
-            }
-        }
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
     </script>
+
+    <script>
+    (function() {
+        // Sticky CTA bar — show after scrolling past hero
+        var bar = document.getElementById('stickyCtaBar');
+        if (!bar) return;
+        var hero = document.getElementById('home');
+        function checkSticky() {
+            if (!hero) return;
+            var heroBottom = hero.offsetTop + hero.offsetHeight;
+            if (window.scrollY > heroBottom - 200) {
+                bar.classList.add('visible');
+            } else {
+                bar.classList.remove('visible');
+            }
+        }
+        window.addEventListener('scroll', checkSticky, {passive: true});
+        checkSticky();
+    })();
+    </script>
+
+    <script src="js/app.js?v=20260923" defer></script>
 </body>
-</html>
+</html>
