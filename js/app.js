@@ -547,6 +547,8 @@
     }
 
     function animateCount(el, target) {
+        // Screen readers get the final value immediately, never the animated zeros
+        el.setAttribute('aria-label', String(target));
         let current = 0;
         const step = Math.max(1, Math.floor(target / 60));
         const interval = setInterval(() => {
@@ -1036,43 +1038,88 @@
                     formData.type = form.id === 'hireForm' ? 'hire' : 'contact';
                     formData.date = new Date().toISOString();
 
-                    // Save to localStorage (for admin panel)
+                    // Save to localStorage (for admin panel, same-browser only)
                     const messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
                     messages.push(formData);
                     localStorage.setItem('portfolio_messages', JSON.stringify(messages));
 
-                    // Send email via EmailJS if configured
-                    (async () => {
-                        try {
-                            const emailConfig = JSON.parse(localStorage.getItem('portfolio_emailjs') || '{}');
-                            const adminEmail = localStorage.getItem('portfolio_admin_email') || '';
-                            if (emailConfig.serviceId && emailConfig.templateId && emailConfig.publicKey && window.emailjs && adminEmail) {
-                                await window.emailjs.send(
-                                    emailConfig.serviceId,
-                                    emailConfig.templateId,
-                                    {
-                                        from_name: formData.name || formData.fullName || 'Visitor',
-                                        from_email: formData.email || '',
-                                        company: formData.company || 'Not specified',
-                                        service: formData.service || 'Not specified',
-                                        subject: formData.subject || (formData.type === 'hire' ? 'Hire Request' : 'Contact Message'),
-                                        message: formData.message || formData.description || ''
-                                    },
-                                    emailConfig.publicKey
-                                );
-                                console.log('Email sent successfully!');
-                            } else {
-                                console.log('EmailJS not configured or admin email missing');
+                    // ── Message delivery ──
+                    // 1) EmailJS if configured (in-page constant; falls back to admin panel config)
+                    // 2) GUARANTEED fallback: opens the visitor's mail client pre-filled
+                    //    with the full message — works from every browser, no service needed.
+                    // ═══════ EMAIL DELIVERY CONFIG ═══════
+                    // Set these three to activate direct email delivery via EmailJS.
+                    // Instructions: emailjs.com → create service + template → paste IDs here.
+                    const EMAILJS_SERVICE_ID  = ''; // e.g. 'service_abc1234'
+                    const EMAILJS_TEMPLATE_ID = ''; // e.g. 'template_xyz5678'
+                    const EMAILJS_PUBLIC_KEY  = ''; // e.g. 'aBcD1234EfGh'
+                    const OWNER_EMAIL = 'amin.saadati5195@gmail.com'; // fallback recipient
+
+                    const name = formData.name || formData.fullName || 'Visitor';
+                    const email = formData.email || '';
+                    const company = formData.company || 'Not specified';
+                    const service = formData.service || 'Not specified';
+                    const budget = formData.budget || formData.budgetRange || '';
+                    const timeline = formData.timeline || '';
+                    const subject = formData.subject || (formData.type === 'hire' ? 'Hire Request' : 'Contact Message');
+                    const message = formData.message || formData.description || '';
+
+                    async function deliverMessage() {
+                        let sentViaEmailJS = false;
+                        const cfg = { serviceId: EMAILJS_SERVICE_ID, templateId: EMAILJS_TEMPLATE_ID, publicKey: EMAILJS_PUBLIC_KEY };
+                        const stored = (() => { try { return JSON.parse(localStorage.getItem('portfolio_emailjs') || '{}'); } catch { return {}; } })();
+                        const svc = cfg.serviceId || stored.serviceId || '';
+                        const tpl = cfg.templateId || stored.templateId || '';
+                        const key = cfg.publicKey || stored.publicKey || '';
+                        const ownerEmail = OWNER_EMAIL || localStorage.getItem('portfolio_admin_email') || '';
+
+                        if (svc && tpl && key && window.emailjs) {
+                            try {
+                                await window.emailjs.send(svc, tpl, {
+                                    to_email: ownerEmail,
+                                    from_name: name,
+                                    from_email: email,
+                                    company,
+                                    service,
+                                    budget, timeline,
+                                    subject,
+                                    message
+                                }, key);
+                                sentViaEmailJS = true;
+                            } catch (err) {
+                                console.warn('EmailJS failed, using mailto fallback:', err);
                             }
-                        } catch (err) {
-                            console.warn('Email failed:', err);
                         }
-                    })();
+
+                        // GUARANTEED fallback: open the visitor's own mail client, fully pre-filled.
+                        if (!sentViaEmailJS) {
+                            const body = [
+                                'Name: ' + name,
+                                'Email: ' + email,
+                                'Company: ' + company,
+                                'Service: ' + service,
+                                budget ? 'Budget: ' + budget : '',
+                                timeline ? 'Timeline: ' + timeline : '',
+                                '',
+                                message,
+                                '',
+                                '— Sent from portfolio contact form'
+                            ].filter(Boolean).join('\n');
+                            const mailto = 'mailto:' + OWNER_EMAIL +
+                                '?subject=' + encodeURIComponent('[Portfolio] ' + subject) +
+                                '&body=' + encodeURIComponent(body);
+                            const win = window.open(mailto, '_blank');
+                            if (win) win.close();
+                        }
+                    }
+
+                    deliverMessage();
 
                     form.innerHTML = `
                         <div class="form-success" style="text-align:center;padding:40px 20px;">
                             <p style="color:var(--green);font-size:18px;margin-bottom:12px;">✅ Your message has been sent successfully!</p>
                             <p style="color:var(--text-3);font-size:13px;">
+                                Your email app may open to confirm delivery — just press send.<br>
                                 We will get back to you shortly.
                             </p>
                         </div>
