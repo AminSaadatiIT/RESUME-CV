@@ -1352,6 +1352,34 @@
         });
     }
 
+    // ═══════ SECRET ADMIN ACCESS — triple-click the logo ═══════
+    // Standard discreet pattern (WordPress-style): 3 quick clicks within
+    // 600ms opens the admin panel. Invisible to recruiters, instant for you.
+    function initAdminAccess() {
+        const logo = document.querySelector('a.logo');
+        if (!logo) return;
+
+        // Direct navigation wins over triple-click when ?login is already intended
+        let clicks = 0;
+        let timer = null;
+        const WINDOW_MS = 600;
+
+        logo.addEventListener('click', (e) => {
+            clicks++;
+            if (clicks === 1) {
+                timer = setTimeout(() => { clicks = 0; }, WINDOW_MS);
+                return; // single click = normal anchor behavior (#home)
+            }
+            // second or third click inside the window
+            clearTimeout(timer);
+            if (clicks >= 3) {
+                clicks = 0;
+                e.preventDefault();
+                window.location.href = 'admin.html?login';
+            }
+        });
+    }
+
     // ═══════ INIT ═══════
     function init() {
         // Initialize EmailJS with stored public key
@@ -1369,6 +1397,7 @@
         initScrollProgress();
         initParallax();
         initCustomCursor();
+        initAdminAccess();
         initParticles();
         initTypewriter();
         initCounters();

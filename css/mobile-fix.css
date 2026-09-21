@@ -3,14 +3,17 @@
    ═══════════════════════════════════════════ */
 
 /* ── Performance: GPU hints ── */
+/* NOTE: do NOT set `transform: translateZ(0)` on .avatar here — the base
+   transform positions each avatar on its orbit via rotate/translateY with
+   CSS vars (--angle/--radius); overwriting it collapses ALL avatars onto
+   the center point (the "crushed orbit" bug). will-change alone is safe. */
 .orbit, .orbit-1, .orbit-2, .orbit-3, .orbit-4 {
     will-change: transform;
-    transform: translateZ(0);
     backface-visibility: hidden;
 }
 .avatar {
     will-change: transform, opacity;
-    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 .circles-container {
     contain: layout paint;
@@ -187,22 +190,32 @@
         border-radius: 10px !important;
     }
 
-    /* ── Hero Right (Orbit) — Centered Below Text ── */
+    /* ── Hero Right (Orbit) — Scaled Down As A Whole ── */
+    /* The orbit system is fixed-size (720px) with avatars on hard-coded
+       radii, so shrinking the BOX alone crushes rings/icons together.
+       Instead: keep the inner system at full 720px and scale the WHOLE
+       thing down — proportions stay perfect at any width. */
     .hero-right {
         flex: none !important;
-        width: 200px !important;
-        height: 200px !important;
+        width: min(78vw, 340px) !important;
+        height: min(78vw, 340px) !important;
         margin: 0 auto !important;
         padding: 0 !important;
-        overflow: visible !important;
         position: relative !important;
         align-self: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: visible !important;
     }
 
     .circles-container {
-        width: 200px !important;
-        height: 200px !important;
-        transform: scale(0.35) !important;
+        width: 720px !important;
+        height: 720px !important;
+        flex: none !important;
+        /* 720 → container width, computed live via CSS min(); the fallback
+           scale covers browsers without min() in transform (all modern ones support it) */
+        transform: scale(0.47) !important;
         transform-origin: center center !important;
     }
 
@@ -528,14 +541,12 @@
     }
 
     .hero-right {
-        width: 160px !important;
-        height: 160px !important;
+        width: 220px !important;
+        height: 220px !important;
     }
 
     .circles-container {
-        width: 160px !important;
-        height: 160px !important;
-        transform: scale(0.28) !important;
+        transform: scale(0.3) !important;
     }
 
     .stat-number {
@@ -606,7 +617,7 @@
     }
 
     .circles-container {
-        transform: scale(0.7) !important;
+        transform: scale(0.55) !important;
     }
 
     .about-premium {
@@ -616,5 +627,34 @@
 
     .profile-photo-container {
         height: 360px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   ORBIT — fluid scale at every narrow width
+   The 720px circle system keeps perfect proportions;
+   only the whole-system scale changes. Wins over the
+   rules above via source order.
+   ═══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .circles-container {
+        transform: scale(0.55) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .circles-container {
+        transform: scale(0.45) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-right {
+        width: min(76vw, 290px) !important;
+        height: min(76vw, 290px) !important;
+    }
+
+    .circles-container {
+        transform: scale(0.38) !important;
     }
 }
