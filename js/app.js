@@ -376,6 +376,59 @@
         }, { passive: true });
     }
 
+    // ═══════ CUSTOM CURSOR — dot (1:1) + trailing ring ═══════
+    // The dot is written directly on mousemove (no lerp) so it is ALWAYS
+    // at mouse position — zero perceived latency. The ring lerps gently
+    // for a premium trailing feel. Everything is transform-only.
+    function initCustomCursor() {
+        if (prefersReducedMotion || isMobile) return;
+        const dot = $('#cursorDot');
+        const ring = $('#cursorRing');
+        if (!dot || !ring) return;
+        if (!window.matchMedia('(pointer: fine)').matches) return;
+
+        document.body.classList.add('custom-cursor-active');
+
+        let mx = -100, my = -100;   // real mouse position
+        let rx = -100, ry = -100;   // ring position (lerped)
+        let seen = false;           // cursor becomes visible after first real move
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            if (!seen) { seen = true; rx = mx; ry = my; dot.classList.add('is-visible'); ring.classList.add('is-visible'); }
+            // dot: write directly on mousemove — no lerp → zero lag
+            dot.style.transform = `translate3d(${mx - 4}px, ${my - 4}px, 0)`;
+        }, { passive: true });
+
+        (function ringLoop() {
+            rx += (mx - rx) * 0.18;
+            ry += (my - ry) * 0.18;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%,-50%)`;
+            requestAnimationFrame(ringLoop);
+        })();
+
+        // Hover states: grow ring over interactive elements, text-bar over fields
+        const HOVER_SELECTOR = 'a, button, [role="button"], .filter-btn, .slider-dot, .faq-item, .custom-select-trigger, label, summary';
+        const TEXT_SELECTOR = 'input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea, [contenteditable="true"]';
+
+        document.addEventListener('mouseover', e => {
+            if (e.target.closest(TEXT_SELECTOR)) ring.classList.add('is-text');
+            else if (e.target.closest(HOVER_SELECTOR)) ring.classList.add('is-hover');
+        });
+        document.addEventListener('mouseout', e => {
+            if (e.target.closest(TEXT_SELECTOR)) ring.classList.remove('is-text');
+            else if (e.target.closest(HOVER_SELECTOR)) ring.classList.remove('is-hover');
+        });
+
+        // Press feedback
+        document.addEventListener('mousedown', () => dot.classList.add('is-down'));
+        document.addEventListener('mouseup', () => dot.classList.remove('is-down'));
+
+        // Hide when pointer leaves the window
+        document.addEventListener('mouseleave', () => { dot.classList.remove('is-visible'); ring.classList.remove('is-visible'); });
+        document.addEventListener('mouseenter', () => { if (seen) { dot.classList.add('is-visible'); ring.classList.add('is-visible'); } });
+    }
+
     // ═══════ CURSOR GLOW — transform-only, snappy follow ═══════
     function initCursorGlow() {
         if (prefersReducedMotion || isMobile) return;
@@ -1232,6 +1285,7 @@
         applySettings();      // Apply admin settings first
         initScrollProgress();
         initParallax();
+        initCustomCursor();
         initCursorGlow();
         initParticles();
         initTypewriter();

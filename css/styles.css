@@ -109,11 +109,84 @@ button { border:none; background:none; cursor:pointer; font:inherit; color:inher
 }
 
 /* ═══════════════════════════════════════════
-   CURSOR GLOW — GPU-friendly (transform only)
+   CUSTOM CURSOR — redesigned dot + ring
    ═══════════════════════════════════════════ */
-/* Custom SVG cursor removed — data-URI cursors force per-frame
-   software rasterization and cause the classic "slow/laggy mouse"
-   feel on Windows. The native hardware cursor is instant. */
+/* Design: an instant amber dot tracks the mouse 1:1 (zero perceived
+   lag — it moves AT mouse speed), while a larger ring trails with a
+   light spring for depth. All movement is transform-only →
+   GPU-composited, no layout work per frame. The ring GROWS over
+   interactive elements so the affordance the old hover-cursor gave
+   is preserved. Disabled on coarse pointers and reduced-motion. */
+
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    left: 0; top: 0;
+    pointer-events: none;
+    z-index: 2147483000; /* above modals, nav, sticky CTAs */
+    will-change: transform;
+    display: none; /* JS opts in via body.custom-cursor-active */
+    opacity: 0;    /* JS opts in via .is-visible on first mouse move */
+}
+
+body.custom-cursor-active .cursor-dot,
+body.custom-cursor-active .cursor-ring {
+    display: block;
+}
+
+.cursor-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 10px rgba(232,168,56,0.7);
+    transition: opacity 250ms ease;
+}
+
+.cursor-ring {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(232,168,56,0.55);
+    transition: width 200ms var(--ease), height 200ms var(--ease),
+                border-color 200ms var(--ease), background-color 200ms var(--ease),
+                opacity 250ms ease;
+}
+
+/* Visibility (must come BEFORE is-hover/is-text so states can win) */
+.cursor-dot.is-visible { opacity: 1; }
+.cursor-ring.is-visible { opacity: 0.65; }
+
+/* Ring grows and fills slightly over anything interactive */
+.cursor-ring.is-hover {
+    width: 56px; height: 56px;
+    border-color: var(--accent);
+    background: rgba(0,185,148,0.08);
+    opacity: 0.95;
+}
+
+/* Text fields: thin vertical bar replaces the ring to signal text insert */
+.cursor-ring.is-text {
+    width: 3px; height: 22px;
+    border-radius: 2px;
+    border-color: var(--accent);
+    background: var(--accent);
+    opacity: 0.9;
+}
+
+/* Press feedback: dot scales down briefly (scale via dedicated class) */
+.cursor-dot.is-down { scale: 0.6; }
+
+/* Hide the OS cursor everywhere once JS confirms the custom cursor is active */
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button,
+body.custom-cursor-active [role="button"],
+body.custom-cursor-active input,
+body.custom-cursor-active textarea,
+body.custom-cursor-active select,
+body.custom-cursor-active label,
+body.custom-cursor-active summary {
+    cursor: none;
+}
 
 .cursor-glow {
     position: fixed;
