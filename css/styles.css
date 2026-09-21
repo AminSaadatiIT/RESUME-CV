@@ -188,21 +188,8 @@ body.custom-cursor-active summary {
     cursor: none;
 }
 
-.cursor-glow {
-    position: fixed;
-    left: 0; top: 0;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 1;
-    background: radial-gradient(circle, rgba(232,168,56,0.08) 0%, transparent 70%);
-    will-change: transform;
-    display: none;
-}
-
-@media (pointer: fine) {
-    .cursor-glow { display: block; }
-}
+/* cursor-glow disabled — see js note in initCustomCursor */
+.cursor-glow { display: none !important; }
 
 /* ═══════════════════════════════════════════
    AURORA BACKGROUND
@@ -227,7 +214,9 @@ body.custom-cursor-active summary {
     position: absolute;
     border-radius: 50%;
     will-change: transform;
-    mix-blend-mode: screen;
+    /* mix-blend-mode: screen removed — blending 5 large orbs forced a
+       full-window recomposite every frame, which reads as mouse lag.
+       Orbs are already additive-looking on the dark background. */
 }
 
 .orb-1 {

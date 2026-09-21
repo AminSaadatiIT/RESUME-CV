@@ -376,41 +376,29 @@
         }, { passive: true });
     }
 
-    // ═══════ CUSTOM CURSOR — dot (1:1) + trailing ring ═══════
-    // The dot is written directly on mousemove (no lerp) so it is ALWAYS
-    // at mouse position — zero perceived latency. The ring lerps gently
-    // for a premium trailing feel. Everything is transform-only.
+    // ═══════ CUSTOM CURSOR — zero-lag dot + ring (both synchronous) ═══════
+    // Both layers are written DIRECTLY on mousemove — no lerp, no rAF hop,
+    // no trailing. They move AT mouse speed: zero perceived latency.
     function initCustomCursor() {
-        // NOTE: deliberately NOT gated on prefersReducedMotion — the dot/ring
-        // is pointer feedback, not decoration. Reduced-motion users still get
-        // the 1:1 dot; only the trailing lerp is switched off below.
-        if (isMobile) return;
+        // Pointer feedback, not decoration — active even under reduced motion.
+        // Gate on POINTER TYPE, not screen width: a narrow desktop window or
+        // split-screen browser still has a fine mouse pointer.
+        if (window.matchMedia('(pointer: coarse)').matches) return;
         const dot = $('#cursorDot');
         const ring = $('#cursorRing');
         if (!dot || !ring) return;
-        if (!window.matchMedia('(pointer: fine)').matches) return;
 
         document.body.classList.add('custom-cursor-active');
 
-        let mx = -100, my = -100;   // real mouse position
-        let rx = -100, ry = -100;   // ring position (lerped)
         let seen = false;           // cursor becomes visible after first real move
 
         document.addEventListener('mousemove', e => {
-            mx = e.clientX; my = e.clientY;
-            if (!seen) { seen = true; rx = mx; ry = my; dot.classList.add('is-visible'); ring.classList.add('is-visible'); }
-            // dot: write directly on mousemove — no lerp → zero lag
-            dot.style.transform = `translate3d(${mx - 4}px, ${my - 4}px, 0)`;
+            if (!seen) { seen = true; dot.classList.add('is-visible'); ring.classList.add('is-visible'); }
+            // Both layers written DIRECTLY on mousemove — no lerp, no rAF hop,
+            // no trailing. They move AT mouse speed: zero perceived latency.
+            dot.style.transform = `translate3d(${e.clientX - 4}px, ${e.clientY - 4}px, 0)`;
+            ring.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%,-50%)`;
         }, { passive: true });
-
-        (function ringLoop() {
-            // Reduced motion: ring snaps to the dot (no trailing animation)
-            const f = prefersReducedMotion ? 1 : 0.18;
-            rx += (mx - rx) * f;
-            ry += (my - ry) * f;
-            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%,-50%)`;
-            requestAnimationFrame(ringLoop);
-        })();
 
         // Hover states: grow ring over interactive elements, text-bar over fields
         const HOVER_SELECTOR = 'a, button, [role="button"], .filter-btn, .slider-dot, .faq-item, .custom-select-trigger, label, summary';
@@ -433,31 +421,12 @@
         document.addEventListener('mouseleave', () => { dot.classList.remove('is-visible'); ring.classList.remove('is-visible'); });
         document.addEventListener('mouseenter', () => { if (seen) { dot.classList.add('is-visible'); ring.classList.add('is-visible'); } });
 
-        console.info('[cursor] custom cursor active — v20260926');
+        console.info('[cursor] zero-lag cursor active');
     }
 
-    // ═══════ CURSOR GLOW — transform-only, snappy follow ═══════
-    function initCursorGlow() {
-        if (prefersReducedMotion || isMobile) return;
-        const glow = $('#cursorGlow');
-        if (!glow || !window.matchMedia('(pointer: fine)').matches) return;
-
-        let mx = -600, my = -600, gx = -600, gy = -600;
-
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-        document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
-        document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
-
-        function animate() {
-            // 0.25 = snappy (was 0.07 which trailed far behind and felt laggy)
-            gx += (mx - gx) * 0.25;
-            gy += (my - gy) * 0.25;
-            // transform only — never touches layout, fully GPU-composited
-            glow.style.transform = `translate3d(${gx - 250}px, ${gy - 250}px, 0)`;
-            requestAnimationFrame(animate);
-        }
-        animate();
-    }
+    // CURSOR GLOW: intentionally disabled. A 500px gradient easing behind the
+    // pointer reads as mouse lag even at high fps, and costs a full-window
+    // recomposite per frame. The dot+ring cursor above is the only pointer layer.
 
     // ═══════ PARTICLES & METEORS ═══════
     function initParticles() {
@@ -1400,7 +1369,6 @@
         initScrollProgress();
         initParallax();
         initCustomCursor();
-        initCursorGlow();
         initParticles();
         initTypewriter();
         initCounters();
