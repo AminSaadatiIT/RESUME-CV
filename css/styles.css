@@ -109,26 +109,21 @@ button { border:none; background:none; cursor:pointer; font:inherit; color:inher
 }
 
 /* ═══════════════════════════════════════════
-   CURSOR GLOW
+   CURSOR GLOW — GPU-friendly (transform only)
    ═══════════════════════════════════════════ */
-/* Custom Cursor */
-body, a, button, [role="button"] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23E8A838' stroke-width='2' opacity='0.9'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23E8A838'/%3E%3C/svg%3E") 16 16, auto;
-}
-
-a:hover, button:hover, [role="button"]:hover {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%2300B894' stroke-width='2' opacity='0.9'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2300B894'/%3E%3C/svg%3E") 16 16, pointer;
-}
+/* Custom SVG cursor removed — data-URI cursors force per-frame
+   software rasterization and cause the classic "slow/laggy mouse"
+   feel on Windows. The native hardware cursor is instant. */
 
 .cursor-glow {
     position: fixed;
+    left: 0; top: 0;
     width: 500px; height: 500px;
     border-radius: 50%;
     pointer-events: none;
     z-index: 1;
     background: radial-gradient(circle, rgba(232,168,56,0.08) 0%, transparent 70%);
-    transform: translate(-50%,-50%);
-    will-change: left, top;
+    will-change: transform;
     display: none;
 }
 
@@ -166,35 +161,30 @@ a:hover, button:hover, [role="button"]:hover {
     width: 900px; height: 900px;
     top: -10%; right: -5%;
     background: radial-gradient(circle, rgba(0,112,243,0.35) 0%, transparent 70%);
-    filter: blur(60px);
     animation: orbFloat1 20s ease-in-out infinite;
 }
 .orb-2 {
     width: 800px; height: 800px;
     bottom: -5%; left: -5%;
     background: radial-gradient(circle, rgba(121,40,202,0.35) 0%, transparent 70%);
-    filter: blur(60px);
     animation: orbFloat2 25s ease-in-out infinite;
 }
 .orb-3 {
     width: 600px; height: 600px;
     top: 40%; left: 30%;
     background: radial-gradient(circle, rgba(255,0,128,0.25) 0%, transparent 70%);
-    filter: blur(80px);
     animation: orbFloat3 18s ease-in-out infinite;
 }
 .orb-4 {
     width: 500px; height: 500px;
     top: 60%; right: 10%;
     background: radial-gradient(circle, rgba(0,223,216,0.25) 0%, transparent 70%);
-    filter: blur(70px);
     animation: orbFloat4 22s ease-in-out infinite;
 }
 .orb-5 {
     width: 400px; height: 400px;
     top: 15%; left: 15%;
     background: radial-gradient(circle, rgba(245,166,35,0.2) 0%, transparent 70%);
-    filter: blur(50px);
     animation: orbFloat5 28s ease-in-out infinite;
 }
 
@@ -755,7 +745,6 @@ a:hover, button:hover, [role="button"]:hover {
     top: 50%; left: 30%;
     width: 800px; height: 800px;
     background: radial-gradient(circle, rgba(0,112,243,0.2) 0%, transparent 70%);
-    filter: blur(80px);
     transform: translate(-50%, -50%);
     pointer-events: none;
     animation: aboutGlow 15s ease-in-out infinite;

@@ -376,21 +376,24 @@
         }, { passive: true });
     }
 
-    // ═══════ CURSOR GLOW ═══════
+    // ═══════ CURSOR GLOW — transform-only, snappy follow ═══════
     function initCursorGlow() {
         if (prefersReducedMotion || isMobile) return;
         const glow = $('#cursorGlow');
         if (!glow || !window.matchMedia('(pointer: fine)').matches) return;
 
-        let mx = 0, my = 0, gx = 0, gy = 0;
+        let mx = -600, my = -600, gx = -600, gy = -600;
 
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+        document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+        document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
 
         function animate() {
-            gx += (mx - gx) * 0.07;
-            gy += (my - gy) * 0.07;
-            glow.style.left = gx + 'px';
-            glow.style.top = gy + 'px';
+            // 0.25 = snappy (was 0.07 which trailed far behind and felt laggy)
+            gx += (mx - gx) * 0.25;
+            gy += (my - gy) * 0.25;
+            // transform only — never touches layout, fully GPU-composited
+            glow.style.transform = `translate3d(${gx - 250}px, ${gy - 250}px, 0)`;
             requestAnimationFrame(animate);
         }
         animate();
