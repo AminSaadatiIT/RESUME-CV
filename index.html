@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amin Saadati — Network Infrastructure Specialist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #0f172a;
@@ -402,6 +402,87 @@
             color: var(--gray);
         }
 
+        /* QR — Portfolio link (crisp vector, print-safe) */
+        .qr-block {
+            text-align: center;
+            margin-top: 4px;
+            background: var(--white);
+            border: 1px solid var(--pearl);
+            border-radius: 10px;
+            padding: 12px 10px 10px;
+        }
+        .qr-block img {
+            width: 110px;
+            height: 110px;
+            display: block;
+            margin: 0 auto 6px;
+        }
+        .qr-caption {
+            font-size: 10px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+        .qr-caption a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        /* Language Toggle (screen-only) */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 4px;
+            background: var(--white);
+            border: 1px solid var(--pearl);
+            border-radius: 999px;
+            padding: 4px;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--gray);
+            font: 600 12px 'Inter', sans-serif;
+            padding: 6px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .lang-btn.active { background: var(--navy); color: var(--white); }
+        .lang-btn:hover:not(.active) { color: var(--navy); }
+
+        /* ── Persian (RTL) mode ── */
+        body.lang-fa { direction: rtl; font-family: 'Vazirmatn', 'Inter', sans-serif; }
+        body.lang-fa .sidebar-name,
+        body.lang-fa .sidebar-title,
+        body.lang-fa .section-title,
+        body.lang-fa .exp-role,
+        body.lang-fa .edu-degree,
+        body.lang-fa .cert-name { letter-spacing: 0; }
+        body.lang-fa .sidebar,
+        body.lang-fa .main { text-align: right; }
+        body.lang-fa .exp-item {
+            border-left: none;
+            border-right: 2px solid var(--pearl);
+            padding-left: 0;
+            padding-right: 16px;
+        }
+        body.lang-fa .exp-item::before { left: auto; right: -5px; }
+        body.lang-fa .qr-caption { letter-spacing: 0; }
+        body.lang-fa .back-btn { left: auto; right: 20px; }
+        body.lang-fa .lang-toggle .lang-btn { font-family: 'Vazirmatn', 'Inter', sans-serif; }
+
+        /* Small screens: park the toggle above the download button so it
+           never covers the name */
+        @media (max-width: 700px) {
+            .lang-toggle { top: auto; bottom: 88px; right: 16px; }
+        }
+
         /* Download Button */
         .back-btn {
             position: fixed;
@@ -547,6 +628,7 @@
 
         @media print {
             body { background: white; }
+            .lang-toggle { display: none !important; }
             .page {
                 box-shadow: none;
                 margin: 0;
@@ -573,17 +655,22 @@
         }
     </style>
 </head>
-<body>
+<body class="lang-en">
+    <!-- Language Toggle (screen-only) -->
+    <div class="lang-toggle" role="group" aria-label="Resume language">
+        <button class="lang-btn active" id="btnEn" type="button" aria-pressed="true" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btnFa" type="button" aria-pressed="false" onclick="setLang('fa')">فا</button>
+    </div>
     <div class="page" id="cv-content">
 
         <!-- ═══ SIDEBAR ═══ -->
         <aside class="sidebar">
-            <div class="sidebar-name">Amin Saadati</div>
-            <div class="sidebar-title">Network Specialist</div>
+            <div class="sidebar-name" data-fa="امین سعدتی">Amin Saadati</div>
+            <div class="sidebar-title" data-fa="متخصص شبکه و زیرساخت فناوری اطلاعات">Network Specialist</div>
 
             <!-- Contact -->
             <div class="sidebar-section">
-                <div class="sidebar-label">Contact</div>
+                <div class="sidebar-label" data-fa="راه‌های ارتباطی">Contact</div>
                 <div class="contact-item">
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     <span>Mashhad, Iran</span>
@@ -612,25 +699,27 @@
 
             <!-- Technical Skills -->
             <div class="sidebar-section">
-                <div class="sidebar-label">Technical Skills</div>
-                <div class="skill-group-title">Networking</div>
+                <div class="sidebar-label" data-fa="مهارت‌های فنی">Technical Skills</div>
+                <div class="skill-group-title" data-fa="شبکه">Networking</div>
                 <span class="skill-tag">Cisco</span>
                 <span class="skill-tag">MikroTik</span>
                 <span class="skill-tag">VLANs</span>
                 <span class="skill-tag">WAN</span>
                 <span class="skill-tag">Firewall</span>
-                <div class="skill-group-title">Infrastructure</div>
+                <div class="skill-group-title" data-fa="زیرساخت">Infrastructure</div>
                 <span class="skill-tag">Structured Cabling</span>
                 
                 <span class="skill-tag">Server Room</span>
                 <span class="skill-tag">CCTV</span>
-                <div class="skill-group-title">Systems</div>
+                <div class="skill-group-title" data-fa="سیستم‌ها">Systems</div>
                 <span class="skill-tag">Windows Server</span>
                 <span class="skill-tag">Active Directory</span>
                 <span class="skill-tag">VMware</span>
                 <span class="skill-tag">Hyper-V</span>
                 <span class="skill-tag">IIS</span>
-                <div class="skill-group-title">Programming</div>
+                <span class="skill-tag" data-fa="اسمبل کامپیوتر">PC Assembly</span>
+                <span class="skill-tag" data-fa="عیب‌یابی سخت‌افزار">Hardware Troubleshooting</span>
+                <div class="skill-group-title" data-fa="برنامه‌نویسی">Programming</div>
                 <span class="skill-tag">Python</span>
                 <span class="skill-tag">C++</span>
                 <span class="skill-tag">SQL</span>
@@ -639,9 +728,10 @@
 
             <!-- Soft Skills -->
             <div class="sidebar-section">
-                <div class="sidebar-label">Soft Skills</div>
+                <div class="sidebar-label" data-fa="مهارت‌های نرم">Soft Skills</div>
                 <span class="skill-tag">Team Leadership</span>
                 <span class="skill-tag">Client Communication</span>
+                <span class="skill-tag" data-fa="هلب دسک و پشتیبانی کاربران">Help Desk Support</span>
                 <span class="skill-tag">Problem Solving</span>
                 <span class="skill-tag">Technical Documentation</span>
                 <span class="skill-tag">Event Management</span>
@@ -649,7 +739,7 @@
 
             <!-- Languages -->
             <div class="sidebar-section">
-                <div class="sidebar-label">Languages</div>
+                <div class="sidebar-label" data-fa="زبان‌ها">Languages</div>
                 <div class="lang-item">
                     <span>English</span>
                     <div class="lang-bar"><div class="lang-fill" style="width:85%"></div></div>
@@ -657,6 +747,15 @@
                 <div class="lang-item">
                     <span>Persian</span>
                     <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+                </div>
+            </div>
+
+            <!-- Portfolio QR — scan → live case studies -->
+            <div class="sidebar-section">
+                <div class="qr-block">
+                    <img src="images/qr-portfolio.svg" alt="Scan to view my portfolio with engineering case studies" width="110" height="110">
+                    <div class="qr-caption" data-fa="برای مشاهده پورتفولیو و مطالعات موردی اسکن کنید">Scan for live case studies</div>
+                    <div class="qr-caption"><a href="https://aminsaadatiit.github.io/portfolio/" target="_blank" rel="noopener">aminsaadatiit.github.io/portfolio</a></div>
                 </div>
             </div>
         </aside>
@@ -668,10 +767,9 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    Professional Summary
+                    <span data-fa="خلاصه حرفه‌ای">Professional Summary</span>
                 </div>
-                <p class="summary-text">
-                    Results-driven <strong>Network & IT Infrastructure Specialist</strong> with <strong>2+ years</strong> of hands-on experience managing enterprise-grade systems for <strong>150+ users</strong>. Proven track record in <strong>network administration, CCTV deployment, help desk operations</strong>, and technical event support. Currently completing a <strong>Bachelor's degree in Network Engineering</strong> while delivering real-world IT solutions in hospitality and corporate environments. Known for <strong>efficiency under pressure</strong> — managing full IT operations with a team of just <strong>3 people</strong>, achieving <strong>95%+ same-day resolution rate</strong>, and maintaining <strong>zero critical system failures</strong> over 18 months.
+                <p class="summary-text" data-fa="متخصص <strong>شبکه و زیرساخت فناوری اطلاعات</strong> با <strong>۲+ سال تجربه عملی</strong> در مدیریت سیستم‌های سازمانی برای <strong>+۱۵۰ کاربر</strong>. سابقه اثبات‌شده در <strong>ادمین شبکه، استقرار مداربسته، پشتیبانی هلب دسک</strong> و پشتیبانی فنی رویدادها. مشهور به <strong>کارایی تحت فشار</strong> — مدیریت کامل IT با تیمی تنها <strong>۳ نفره</strong>، نرخ رفع مشکل در همان روز <strong>+۹۵٪</strong> و <strong>صفر خرابی بحرانی</strong> طی ۱۸ ماه. فراتر از شبکه، تجربه عملی در <strong>اسمبل و عیب‌یابی سخت‌افزار کامپیوتر</strong> دارم و به پشتیبانی صبور و اثربخش <strong>هلب دسک</strong> معروفم."> <strong>Network & IT Infrastructure Specialist</strong> with <strong>2+ years</strong> of hands-on experience managing enterprise-grade systems for <strong>150+ users</strong>. Proven track record in <strong>network administration, CCTV deployment, help desk operations</strong>, and technical event support. Currently completing a <strong>Bachelor's degree in Network Engineering</strong> while delivering real-world IT solutions in hospitality and corporate environments. Known for <strong>efficiency under pressure</strong> — managing full IT operations with a team of just <strong>3 people</strong>, achieving <strong>95%+ same-day resolution rate</strong>, and maintaining <strong>zero critical system failures</strong> over 18 months. Beyond networking, I bring hands-on <strong>PC assembly and hardware troubleshooting</strong> experience and a reputation for patient, effective <strong>help desk</strong> support.
                 </p>
             </div>
 
@@ -679,10 +777,9 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Career Objective
+                    <span data-fa="هدف شغلی">Career Objective</span>
                 </div>
-                <p class="summary-text">
-                    Seeking a challenging position as a <strong>Network Engineer</strong> or <strong>IT Infrastructure Specialist</strong> where I can leverage my hands-on experience in enterprise network management, system administration, and technical support to contribute to organizational success. Committed to continuous professional development and obtaining advanced certifications in <strong>Cisco</strong> and <strong>cloud technologies</strong>.
+                <p class="summary-text" data-fa="به‌دنبال موقعیتی چالش‌برانگیز به‌عنوان <strong>مهندس شبکه</strong> یا <strong>متخصص زیرساخت فناوری اطلاعات</strong> هستم تا تجربه عملی خود را در مدیریت شبکه سازمانی، ادمین سیستم‌ها و پشتیبانی فنی در خدمت موفقیت سازمان قرار دهم. متعهد به توسعه مستمر حرفه‌ای و اخذ گواهی‌نامه‌های پیشرفته <strong>سیسکو</strong> و <strong>کلود</strong>."> as a <strong>Network Engineer</strong> or <strong>IT Infrastructure Specialist</strong> where I can leverage my hands-on experience in enterprise network management, system administration, and technical support to contribute to organizational success. Committed to continuous professional development and obtaining advanced certifications in <strong>Cisco</strong> and <strong>cloud technologies</strong>.
                 </p>
             </div>
 
@@ -690,34 +787,35 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-                    Work Experience
+                    <span data-fa="سابقه کاری">Work Experience</span>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-header">
-                        <span class="exp-role">Network & IT Specialist</span>
-                        <span class="exp-date">Feb 2024 — Present</span>
+                        <span class="exp-role" data-fa="کارشناس شبکه و فناوری اطلاعات">Network & IT Specialist</span>
+                        <span class="exp-date" data-fa="اسفند ۱۴۰۲ — اکنون">Feb 2024 — Present</span>
                     </div>
-                    <div class="exp-company">Negin Rose Khorasan (Diplomat Hotel) · Khorasan Razavi, Iran</div>
+                    <div class="exp-company" data-fa="نگین رز خراسان (هتل دیپلمات) · خراسان رضوی، ایران">Negin Rose Khorasan (Diplomat Hotel) · Khorasan Razavi, Iran</div>
                     <ul class="exp-list">
-                        <li>Managed full IT infrastructure for <strong>150+ employees</strong> with a lean team of only <strong>3 people</strong>, reducing operational costs by <strong>25%</strong></li>
-                        <li>Installed and maintained <strong>CCTV surveillance systems</strong> across 5 buildings with <strong>120+ IP cameras</strong></li>
-                        <li>Provided daily <strong>help desk support</strong> with <strong>95%+ same-day resolution rate</strong>, maintaining user satisfaction score of <strong>4.8/5.0</strong></li>
-                        <li>Delivered <strong>technical preparation and live support</strong> for <strong>20+ conferences and events</strong> with zero technical failures</li>
+                        <li data-fa="مدیریت کامل زیرساخت IT برای <strong>+۱۵۰ کاربر</strong> با تیمی تنها <strong>۳ نفره</strong> و کاهش <strong>۲۵٪</strong> هزینه‌های عملیاتی">Managed full IT infrastructure for <strong>150+ employees</strong> with a lean team of only <strong>3 people</strong>, reducing operational costs by <strong>25%</strong></li>
+                        <li data-fa="نصب و نگهداری سامانه <strong>مداربسته</strong> در ۵ ساختمان با <strong>+۱۲۰ دوربین IP</strong>">Installed and maintained <strong>CCTV surveillance systems</strong> across 5 buildings with <strong>120+ IP cameras</strong></li>
+                        <li data-fa="پشتیبانی روزانه <strong>هلب دسک</strong> با نرخ رفع مشکل در همان روز <strong>+۹۵٪</strong> و رضایت کاربران <strong>۴.۸ از ۵</strong>">Provided daily <strong>help desk support</strong> with <strong>95%+ same-day resolution rate</strong>, maintaining user satisfaction score of <strong>4.8/5.0</strong></li>
+                        <li data-fa="آماده‌سازی فنی و پشتیبانی زنده <strong>+۲۰ کنفرانس و رویداد</strong> بدون هیچ خطای فنی">Delivered <strong>technical preparation and live support</strong> for <strong>20+ conferences and events</strong> with zero technical failures</li>
                         <li>Implemented <strong>network monitoring system</strong> that reduced downtime by <strong>40%</strong> and improved response time by <strong>60%</strong></li>
+                        <li>Act as <strong>first-line help desk</strong> for all departments — patient troubleshooting of desktops, printers, and network issues with a user-first attitude</li>
                     </ul>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-header">
-                        <span class="exp-role">Digital Marketing Intern</span>
-                        <span class="exp-date">8-Month Internship</span>
+                        <span class="exp-role" data-fa="کارآموز دیجیتال مارکتینگ">Digital Marketing Intern</span>
+                        <span class="exp-date" data-fa="کارآموزی ۸ ماهه">8-Month Internship</span>
                     </div>
-                    <div class="exp-company">Haghighi Rojaneh Tos</div>
+                    <div class="exp-company" data-fa="حقیقت روشن توس">Haghighi Rojaneh Tos</div>
                     <ul class="exp-list">
-                        <li>Executed <strong>SEO strategies</strong> that improved organic traffic by <strong>45%</strong> for client websites</li>
-                        <li>Managed <strong>digital marketing campaigns</strong> across 5+ channels with <strong>3.2x ROI</strong></li>
-                        <li>Analyzed <strong>campaign performance metrics</strong> and optimized strategies, reducing cost-per-acquisition by <strong>28%</strong></li>
+                        <li data-fa="اجرای استراتژی‌های <strong>SEO</strong> با رشد <strong>۴۵٪</strong> ترافیک ارگانیک سایت‌های مشتریان">Executed <strong>SEO strategies</strong> that improved organic traffic by <strong>45%</strong> for client websites</li>
+                        <li data-fa="مدیریت <strong>کمپین‌های دیجیتال مارکتینگ</strong> در بیش از ۵ کانال با <strong>ROI ۳.۲ برابری</strong>">Managed <strong>digital marketing campaigns</strong> across 5+ channels with <strong>3.2x ROI</strong></li>
+                        <li data-fa="تحلیل شاخص‌های کمپین و بهینه‌سازی استراتژی‌ها با کاهش <strong>۲۸٪</strong> هزینه جذب">Analyzed <strong>campaign performance metrics</strong> and optimized strategies, reducing cost-per-acquisition by <strong>28%</strong></li>
                     </ul>
                 </div>
             </div>
@@ -726,14 +824,14 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
-                    Education
+                    <span data-fa="تحصیلات">Education</span>
                 </div>
                 <div class="edu-item">
                     <div>
-                        <div class="edu-degree">Bachelor's Degree in Network Engineering</div>
-                        <div class="edu-school">Islamic Azad University, Iran</div>
+                        <div class="edu-degree" data-fa="کارشناسی مهندسی شبکه">Bachelor's Degree in Network Engineering</div>
+                        <div class="edu-school" data-fa="دانشگاه آزاد اسلامی، ایران">Islamic Azad University, Iran</div>
                     </div>
-                    <span class="edu-date">Sep 2022 — Present</span>
+                    <span class="edu-date" data-fa="مهر ۱۴۰۱ — اکنون">Sep 2022 — Present</span>
                 </div>
             </div>
 
@@ -741,7 +839,7 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                    Certifications & Courses
+                    <span data-fa="گواهی‌نامه‌ها و دوره‌ها">Certifications & Courses</span>
                 </div>
 
                 <div class="cert-item">
@@ -749,18 +847,8 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div class="cert-info">
-                        <div class="cert-name">CCNA — Cisco Certified Network Associate</div>
-                        <div class="cert-detail">Cisco Systems · Valid Credential</div>
-                    </div>
-                </div>
-
-                <div class="cert-item">
-                    <div class="cert-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="cert-info">
-                        <div class="cert-name">MTCNA — MikroTik Certified Network Associate</div>
-                        <div class="cert-detail">MikroTik · Valid Credential</div>
+                        <div class="cert-name" data-fa="CCNA — کارشناس شبکه سیسکو">CCNA — Cisco Certified Network Associate</div>
+                        <div class="cert-detail" data-fa="Cisco Systems · دارای اعتبار">Cisco Systems · Valid Credential</div>
                     </div>
                 </div>
 
@@ -769,10 +857,9 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div class="cert-info">
-                        <div class="cert-name">Advanced English — Iran Language Institute</div>
-                        <div class="cert-detail">Rating: Outstanding · Issued Jul 2024</div>
+                        <div class="cert-name" data-fa="MTCNA — کارشناس شبکه میکروتیک">MTCNA — MikroTik Certified Network Associate</div>
+                        <div class="cert-detail" data-fa="MikroTik · دارای اعتبار">MikroTik · Valid Credential</div>
                     </div>
-                    <a href="images/certificate-english.jpg" target="_blank" class="cert-link">View →</a>
                 </div>
 
                 <div class="cert-item">
@@ -780,8 +867,19 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div class="cert-info">
-                        <div class="cert-name">IT Support & Help Desk</div>
-                        <div class="cert-detail">Maktabkhooneh Online Platform</div>
+                        <div class="cert-name" data-fa="زبان انگلیسی پیشرفته — کانون زبان ایران">Advanced English — Iran Language Institute</div>
+                        <div class="cert-detail" data-fa="رتبه: عالی · صادره تیر ۱۴۰۳">Rating: Outstanding · Issued Jul 2024</div>
+                    </div>
+                    <a href="images/certificate-english.jpg" target="_blank" class="cert-link" data-fa="مشاهده ←">View →</a>
+                </div>
+
+                <div class="cert-item">
+                    <div class="cert-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="cert-info">
+                        <div class="cert-name" data-fa="پشتیبانی فنی و هلب دسک">IT Support & Help Desk</div>
+                        <div class="cert-detail" data-fa="پلتفرم آنلاین مکتب‌خونه">Maktabkhooneh Online Platform</div>
                     </div>
                 </div>
 
@@ -790,8 +888,8 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     </div>
                     <div class="cert-info">
-                        <div class="cert-name">IELTS Preparation</div>
-                        <div class="cert-detail">Currently in progress · Target: B2+</div>
+                        <div class="cert-name" data-fa="آمادگی آزمون آیلتس">IELTS Preparation</div>
+                        <div class="cert-detail" data-fa="در حال گذراندن · هدف: B2+">Currently in progress · Target: B2+</div>
                     </div>
                 </div>
             </div>
@@ -800,13 +898,13 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    Key Achievements
+                    <span data-fa="دستاوردهای کلیدی">Key Achievements</span>
                 </div>
                 <ul class="exp-list">
-                    <li><strong>Cost Optimization:</strong> Reduced IT operational costs by <strong>25%</strong> through strategic vendor negotiations and resource optimization</li>
-                    <li><strong>System Uptime:</strong> Maintained <strong>99.5% system availability</strong> across all critical infrastructure for 18 consecutive months</li>
-                    <li><strong>Team Efficiency:</strong> Managed complete IT operations with a team of <strong>3 people</strong>, handling workload typically requiring 5-6 staff</li>
-                    <li><strong>Process Improvement:</strong> Implemented automated ticketing system that improved response time by <strong>60%</strong> and user satisfaction by <strong>35%</strong></li>
+                    <li data-fa="<strong>بهینه‌سازی هزینه:</strong> کاهش <strong>۲۵٪</strong> هزینه‌های عملیاتی IT از طریق مذاکرات استراتژیک با تأمین‌کنندگان و بهینه‌سازی منابع"><strong>Cost Optimization:</strong> Reduced IT operational costs by <strong>25%</strong> through strategic vendor negotiations and resource optimization</li>
+                    <li data-fa="<strong>پایداری سیستم:</strong> حفظ <strong>۹۹.۵٪ دسترس‌پذیری</strong> زیرساخت‌های حیاتی طی ۱۸ ماه متوالی"><strong>System Uptime:</strong> Maintained <strong>99.5% system availability</strong> across all critical infrastructure for 18 consecutive months</li>
+                    <li data-fa="<strong>کارایی تیم:</strong> مدیریت کامل عملیات IT با تیمی <strong>۳ نفره</strong>؛ کاری که معمولاً نیازمند ۵ تا ۶ نفر است"><strong>Team Efficiency:</strong> Managed complete IT operations with a team of <strong>3 people</strong>, handling workload typically requiring 5-6 staff</li>
+                    <li data-fa="<strong>بهبود فرآیند:</strong> پیاده‌سازی سامانه تیکتینگ خودکار با بهبود <strong>۶۰٪</strong> زمان پاسخ و <strong>۳۵٪</strong> رضایت کاربران"><strong>Process Improvement:</strong> Implemented automated ticketing system that improved response time by <strong>60%</strong> and user satisfaction by <strong>35%</strong></li>
                 </ul>
             </div>
 
@@ -814,12 +912,13 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    Key Projects
+                    <span data-fa="پروژه‌های کلیدی">Key Projects</span>
                 </div>
                 <ul class="exp-list">
-                    <li><strong>Enterprise IT Infrastructure:</strong> Designed and deployed complete network infrastructure for 150+ users, including structured cabling, server room setup, and active directory configuration — reducing setup time by <strong>30%</strong></li>
-                    <li><strong>CCTV Surveillance System:</strong> Installed and configured <strong>120+ IP cameras</strong> across 5 buildings with centralized NVR monitoring, achieving <strong>100% coverage</strong> with <strong>99.9% uptime</strong></li>
-                    <li><strong>Event Technical Support:</strong> Provided live technical support for <strong>20+ corporate events</strong> and conferences, ensuring <strong>zero technical failures</strong> and receiving <strong>positive feedback from 98%</strong> of participants</li>
+                    <li data-fa="<strong>زیرساخت IT سازمانی:</strong> طراحی و استقرار کامل شبکه برای +۱۵۰ کاربر شامل کابل‌کشی ساختاریافته، اتاق سرور و Active Directory — با کاهش <strong>۳۰٪</strong> زمان راه‌اندازی"><strong>Enterprise IT Infrastructure:</strong> Designed and deployed complete network infrastructure for 150+ users, including structured cabling, server room setup, and active directory configuration — reducing setup time by <strong>30%</strong></li>
+                    <li data-fa="<strong>سامانه نظارت تصویری:</strong> نصب و پیکربندی <strong>+۱۲۰ دوربین IP</strong> در ۵ ساختمان با مانیتورینگ متمرکز NVR، پوشش <strong>۱۰۰٪</strong> و آپ‌تایم <strong>۹۹.۹٪</strong>"><strong>CCTV Surveillance System:</strong> Installed and configured <strong>120+ IP cameras</strong> across 5 buildings with centralized NVR monitoring, achieving <strong>100% coverage</strong> with <strong>99.9% uptime</strong></li>
+                    <li data-fa="<strong>پشتیبانی فنی رویدادها:</strong> پشتیبانی زنده <strong>+۲۰ رویداد</strong> و کنفرانس شرکتی، بدون خطای فنی و با بازخورد مثبت <strong>۹۸٪</strong> حاضران"><strong>Event Technical Support:</strong> Provided live technical support for <strong>20+ corporate events</strong> and conferences, ensuring <strong>zero technical failures</strong> and receiving <strong>positive feedback from 98%</strong> of participants</li>
+                    <li><strong>PC Assembly & Hardware Maintenance:</strong> Assembled, upgraded, and repaired <strong>30+ workstations</strong> — component selection, assembly, OS deployment, and component-level hardware troubleshooting</li>
                 </ul>
             </div>
 
@@ -827,15 +926,15 @@
             <div class="main-section">
                 <div class="section-title">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    References
+                    <span data-fa="معرف‌ها">References</span>
                 </div>
                 <div class="ref-item">
                     <div class="ref-name">Dr. Mahdi Zolfaghari</div>
-                    <div class="ref-role">Director, Iran Language Institute</div>
+                    <div class="ref-role" data-fa="مدیر کانون زبان ایران">Director, Iran Language Institute</div>
                 </div>
                 <div class="ref-item">
                     <div class="ref-name">Dr. Asgari</div>
-                    <div class="ref-role">Faculty Member, Islamic Azad University</div>
+                    <div class="ref-role" data-fa="عضو هیئت علمی دانشگاه آزاد اسلامی">Faculty Member, Islamic Azad University</div>
                 </div>
             </div>
 
@@ -845,14 +944,14 @@
     <!-- Back to Portfolio Button -->
     <a href="https://aminsaadatiit.github.io/portfolio/" class="back-btn" title="Back to Portfolio">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Portfolio</span>
+        <span data-fa="پورتفولیو">Portfolio</span>
     </a>
 
     <!-- Download Button -->
     <div class="download-float">
         <button class="dl-btn" onclick="toggleDlMenu()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            Download
+            <span data-fa="دانلود">Download</span>
         </button>
         <div class="dl-menu" id="dlMenu">
             <button onclick="downloadAs('pdf')">📄 PDF Document</button>
@@ -865,6 +964,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script>
+        /* ═══════ FA/EN LANGUAGE TOGGLE ═══════
+           EN default; FA swaps text via data-fa, applies RTL, persists in
+           localStorage. Only the visible page switches — Word export
+           generates its own fully-FA document. */
+        function setLang(lang) {
+            document.body.classList.toggle('lang-fa', lang === 'fa');
+            document.body.classList.toggle('lang-en', lang === 'en');
+            document.getElementById('htmlRoot').setAttribute('lang', lang);
+            document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+            document.getElementById('btnFa').classList.toggle('active', lang === 'fa');
+            document.getElementById('btnEn').setAttribute('aria-pressed', lang === 'en');
+            document.getElementById('btnFa').setAttribute('aria-pressed', lang === 'fa');
+            document.querySelectorAll('[data-fa]').forEach(el => {
+                if (lang === 'fa') {
+                    if (!el.dataset.en) el.dataset.en = el.innerHTML;   // cache EN on first switch
+                    el.innerHTML = el.dataset.fa;
+                } else if (el.dataset.en) {
+                    el.innerHTML = el.dataset.en;
+                }
+            });
+            try { localStorage.setItem('cv_lang', lang); } catch (err) {}
+        }
+        (function () {
+            try { if (localStorage.getItem('cv_lang') === 'fa') setLang('fa'); } catch (err) {}
+        })();
+
         function toggleDlMenu() {
             document.getElementById('dlMenu').classList.toggle('show');
         }
@@ -909,9 +1034,153 @@
                 btn.style.display = 'block'; 
                 el.classList.remove('pdf-export');
             });
-        }function downloadWord() {
+        }
+
+        function downloadWord() {
+            const isFa = document.body.classList.contains('lang-fa');
             try {
-                const wordHtml = `
+                const wordHtml = isFa ? getWordHtmlFa() : getWordHtmlEn();
+
+                const blob = new Blob(['\ufeff' + wordHtml], { type: 'application/msword;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = isFa ? 'Amin_Saadati_CV_FA.doc' : 'Amin_Saadati_CV.doc';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                console.error('Error generating Word:', err);
+                alert('Error generating Word document. Please try again.');
+            }
+        }
+
+        /* Fully-Persian RTL Word document (independent of page state) */
+        function getWordHtmlFa() { return `
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>امین سعدتی — رزومه</title>
+<style>
+@page WordSection1 { size:21cm 29.7cm; margin:1.5cm; }
+div.WordSection1 { page:WordSection1; }
+body { font-family: Tahoma, 'Vazirmatn', sans-serif; font-size: 10pt; color: #334155; line-height: 1.8; margin: 0; padding: 15px; direction: rtl; text-align: right; }
+table { border-collapse: collapse; width: 100%; }
+td { vertical-align: top; padding: 8px; }
+p { margin: 0 0 4px 0; }
+.name { font-size: 20pt; font-weight: bold; color: #0f172a; }
+.title { font-size: 11pt; color: #b8860b; font-weight: 500; }
+.contact { font-size: 9pt; color: #64748b; }
+.section-title { font-size: 11pt; font-weight: bold; color: #0f172a; border-bottom: 2px solid #d4a853; padding-bottom: 3px; margin: 12px 0 8px 0; }
+.exp-role { font-weight: bold; color: #0f172a; }
+.exp-date { color: #2563eb; font-size: 9pt; }
+.exp-company { color: #64748b; font-size: 9.5pt; }
+.skill-label { color: #94a3b8; font-size: 8.5pt; margin: 6px 0 2px 0; font-weight: bold; }
+.skill-value { font-size: 9pt; }
+.cert-item { background: #f1f5f9; padding: 5px 8px; margin-bottom: 4px; font-size: 9.5pt; }
+ul { margin: 2px 0 4px 0; padding-right: 16px; padding-left: 0; }
+li { margin-bottom: 3px; font-size: 10pt; }
+strong { color: #0f172a; }
+a { color: #2563eb; }
+</style>
+</head>
+<body dir="rtl">
+<div class="WordSection1">
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td colspan="2" style="text-align:center;border-bottom:3px solid #d4a853;padding-bottom:10px;">
+<p class="name">امین سعدتی</p>
+<p class="title">متخصص شبکه و زیرساخت فناوری اطلاعات</p>
+<p class="contact">مشهد، ایران &bull; +98 999 971 8581 &bull; amin.saadati5195@gmail.com<br>
+<a href="https://github.com/AminSaadatiIT">گیت‌هاب</a> &bull; <a href="https://www.linkedin.com/in/amin-saadati-it/">لینکدین</a> &bull; <a href="https://aminsaadatiit.github.io/portfolio/">پورتفولیو</a></p>
+</td>
+</tr>
+<tr>
+<td style="width:35%;background:#0f172a;color:#cbd5e1;padding:15px;">
+<p style="color:#d4a853;font-weight:bold;font-size:9pt;margin-bottom:8px;">مهارت‌های فنی</p>
+<p class="skill-label">شبکه</p>
+<p class="skill-value">سیسکو، میکروتیک، VLAN، WAN، فایروال</p>
+<p class="skill-label">زیرساخت</p>
+<p class="skill-value">کابل‌کشی ساختاریافته، اتاق سرور، مداربسته، مانیتورینگ شبکه</p>
+<p class="skill-label">سیستم‌ها</p>
+<p class="skill-value">ویندوز سرور، اکتیو دایرکتوری، VMware، Hyper-V، IIS، اسمبل کامپیوتر، عیب‌یابی سخت‌افزار</p>
+<p class="skill-label">برنامه‌نویسی</p>
+<p class="skill-value">پایتون، ++C، SQL، آردوینو</p>
+
+<p style="color:#d4a853;font-weight:bold;font-size:9pt;margin:12px 0 8px 0;">مهارت‌های نرم</p>
+<p class="skill-value">رهبری تیم، ارتباط با مشتری، پشتیبانی هلب دسک، حل مسئله، مستندسازی فنی، مدیریت رویداد</p>
+
+<p style="color:#d4a853;font-weight:bold;font-size:9pt;margin:12px 0 8px 0;">زبان‌ها</p>
+<p class="skill-value">انگلیسی — حرفه‌ای</p>
+<p class="skill-value">فارسی — زبان مادری</p>
+</td>
+<td style="width:65%;padding:15px;">
+<p class="section-title">خلاصه حرفه‌ای</p>
+<p>متخصص <strong>شبکه و زیرساخت فناوری اطلاعات</strong> با <strong>۲+ سال تجربه عملی</strong> در مدیریت سیستم‌های سازمانی برای <strong>+۱۵۰ کاربر</strong>. سابقه اثبات‌شده در <strong>ادمین شبکه، استقرار مداربسته، پشتیبانی هلب دسک</strong> و پشتیبانی فنی رویدادها. مشهور به <strong>کارایی تحت فشار</strong> — مدیریت کامل IT با تیمی تنها <strong>۳ نفره</strong>، نرخ رفع مشکل در همان روز <strong>+۹۵٪</strong> و <strong>صفر خرابی بحرانی</strong> طی ۱۸ ماه. فراتر از شبکه، تجربه عملی در <strong>اسمبل و عیب‌یابی سخت‌افزار کامپیوتر</strong> دارم و به پشتیبانی صبور و اثربخش <strong>هلب دسک</strong> معروفم.</p>
+
+<p class="section-title">هدف شغلی</p>
+<p>به‌دنبال موقعیتی چالش‌برانگیز به‌عنوان <strong>مهندس شبکه</strong> یا <strong>متخصص زیرساخت فناوری اطلاعات</strong> هستم تا تجربه عملی خود را در مدیریت شبکه سازمانی، ادمین سیستم‌ها و پشتیبانی فنی در خدمت موفقیت سازمان قرار دهم.</p>
+
+<p class="section-title">سابقه کاری</p>
+<p><span class="exp-role">کارشناس شبکه و فناوری اطلاعات</span> &nbsp; <span class="exp-date">اسفند ۱۴۰۲ — اکنون</span></p>
+<p class="exp-company">نگین رز خراسان (هتل دیپلمات) &bull; خراسان رضوی، ایران</p>
+<ul>
+<li>مدیریت کامل زیرساخت IT برای <strong>+۱۵۰ کاربر</strong> با تیمی تنها <strong>۳ نفره</strong> و کاهش <strong>۲۵٪</strong> هزینه‌های عملیاتی</li>
+<li>نصب و نگهداری سامانه <strong>مداربسته</strong> در ۵ ساختمان با <strong>+۱۲۰ دوربین IP</strong></li>
+<li>پشتیبانی روزانه <strong>هلب دسک</strong> با نرخ رفع مشکل در همان روز <strong>+۹۵٪</strong> و رضایت کاربران <strong>۴.۸ از ۵</strong></li>
+<li>آماده‌سازی فنی و پشتیبانی زنده <strong>+۲۰ کنفرانس و رویداد</strong> بدون هیچ خطای فنی</li>
+<li>پیاده‌سازی سامانه مانیتورینگ شبکه با کاهش <strong>۴۰٪</strong> خرابی و بهبود <strong>۶۰٪</strong> زمان پاسخ</li>
+<li>پاسخگویی به‌عنوان <strong>خط اول هلب دسک</strong> برای همه واحدها — عیب‌یابی صبور دسکتاپ، پرینتر و مشکلات شبکه</li>
+</ul>
+
+<p><span class="exp-role">کارآموز دیجیتال مارکتینگ</span> &nbsp; <span class="exp-date">کارآموزی ۸ ماهه</span></p>
+<p class="exp-company">حقیقت روشن توس</p>
+<ul>
+<li>اجرای استراتژی‌های <strong>SEO</strong> با رشد <strong>۴۵٪</strong> ترافیک ارگانیک سایت‌های مشتریان</li>
+<li>مدیریت <strong>کمپین‌های دیجیتال مارکتینگ</strong> در بیش از ۵ کانال با <strong>ROI ۳.۲ برابری</strong></li>
+<li>تحلیل شاخص‌های کمپین و بهینه‌سازی استراتژی‌ها با کاهش <strong>۲۸٪</strong> هزینه جذب</li>
+</ul>
+
+<p class="section-title">تحصیلات</p>
+<p><strong>کارشناسی مهندسی شبکه</strong> — دانشگاه آزاد اسلامی، ایران &bull; مهر ۱۴۰۱ — اکنون</p>
+
+<p class="section-title">گواهی‌نامه‌ها و دوره‌ها</p>
+<div class="cert-item"><strong>CCNA</strong> — کارشناس شبکه سیسکو</div>
+<div class="cert-item"><strong>MTCNA</strong> — کارشناس شبکه میکروتیک</div>
+<div class="cert-item"><strong>زبان انگلیسی پیشرفته</strong> — کانون زبان ایران (رتبه: عالی)</div>
+<div class="cert-item"><strong>پشتیبانی فنی و هلب دسک</strong> — مکتب‌خونه</div>
+<div class="cert-item"><strong>آمادگی آیلتس</strong> — در حال گذراندن (هدف: B2+)</div>
+
+<p class="section-title">دستاوردهای کلیدی</p>
+<ul>
+<li><strong>بهینه‌سازی هزینه:</strong> کاهش <strong>۲۵٪</strong> هزینه‌های عملیاتی IT از طریق مذاکرات استراتژیک با تأمین‌کنندگان</li>
+<li><strong>پایداری سیستم:</strong> حفظ <strong>۹۹.۵٪ دسترس‌پذیری</strong> زیرساخت‌های حیاتی طی ۱۸ ماه متوالی</li>
+<li><strong>کارایی تیم:</strong> مدیریت کامل عملیات IT با تیمی <strong>۳ نفره</strong>؛ کاری که معمولاً نیازمند ۵ تا ۶ نفر است</li>
+<li><strong>بهبود فرآیند:</strong> پیاده‌سازی سامانه تیکتینگ خودکار با بهبود <strong>۶۰٪</strong> زمان پاسخ</li>
+</ul>
+
+<p class="section-title">پروژه‌های کلیدی</p>
+<ul>
+<li><strong>زیرساخت IT سازمانی:</strong> طراحی و استقرار کامل شبکه برای +۱۵۰ کاربر شامل کابل‌کشی ساختاریافته، اتاق سرور و Active Directory — با کاهش <strong>۳۰٪</strong> زمان راه‌اندازی</li>
+<li><strong>سامانه نظارت تصویری:</strong> نصب و پیکربندی <strong>+۱۲۰ دوربین IP</strong> در ۵ ساختمان با مانیتورینگ متمرکز NVR، پوشش <strong>۱۰۰٪</strong> و آپ‌تایم <strong>۹۹.۹٪</strong></li>
+<li><strong>پشتیبانی فنی رویدادها:</strong> پشتیبانی زنده <strong>+۲۰ رویداد</strong> و کنفرانس شرکتی، بدون خطای فنی و با بازخورد مثبت <strong>۹۸٪</strong> حاضران</li>
+<li><strong>اسمبل و نگهداری سخت‌افزار:</strong> مونتاژ، ارتقا و تعمیر <strong>+۳۰ ایستگاه کاری</strong> — انتخاب قطعات، اسمبل، نصب سیستم‌عامل و عیب‌یابی سطح قطعات</li>
+</ul>
+
+<p class="section-title">معرف‌ها</p>
+<p><strong>دکتر مهدی ذوالفقاری</strong> — مدیر کانون زبان ایران</p>
+<p><strong>دکتر عسگری</strong> — عضو هیئت علمی دانشگاه آزاد اسلامی</p>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>`; }
+        /* Fully-English Word document (independent of page state) */
+        function getWordHtmlEn() { return `
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
@@ -956,12 +1225,12 @@ strong { color: #0f172a; }
 <p class="skill-label">Infrastructure</p>
 <p class="skill-value">Structured Cabling, Server Room, CCTV, Network Monitoring</p>
 <p class="skill-label">Systems</p>
-<p class="skill-value">Windows Server, Active Directory, VMware, Hyper-V, IIS</p>
+<p class="skill-value">Windows Server, Active Directory, VMware, Hyper-V, IIS, PC Assembly, Hardware Troubleshooting</p>
 <p class="skill-label">Programming</p>
 <p class="skill-value">Python, C++, SQL, Arduino</p>
 
 <p style="color:#d4a853;font-weight:bold;font-size:9pt;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px 0;">Soft Skills</p>
-<p class="skill-value">Team Leadership, Client Communication, Problem Solving, Technical Documentation, Event Management</p>
+<p class="skill-value">Team Leadership, Client Communication, Help Desk Support, Problem Solving, Technical Documentation, Event Management</p>
 
 <p style="color:#d4a853;font-weight:bold;font-size:9pt;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px 0;">Languages</p>
 <p class="skill-value">English — Professional</p>
@@ -969,7 +1238,7 @@ strong { color: #0f172a; }
 </td>
 <td style="width:65%;padding:15px;">
 <p class="section-title">Professional Summary</p>
-<p>Results-driven <strong>Network & IT Infrastructure Specialist</strong> with <strong>2+ years</strong> of hands-on experience managing enterprise-grade systems for <strong>150+ users</strong>. Proven track record in <strong>network administration, CCTV deployment, help desk operations</strong>, and technical event support. Known for <strong>efficiency under pressure</strong> — managing full IT operations with a team of just <strong>3 people</strong>, achieving <strong>95%+ same-day resolution rate</strong>, and maintaining <strong>zero critical system failures</strong> over 18 months.</p>
+<p>Results-driven <strong>Network & IT Infrastructure Specialist</strong> with <strong>2+ years</strong> of hands-on experience managing enterprise-grade systems for <strong>150+ users</strong>. Proven track record in <strong>network administration, CCTV deployment, help desk operations</strong>, and technical event support. Known for <strong>efficiency under pressure</strong> — managing full IT operations with a team of just <strong>3 people</strong>, achieving <strong>95%+ same-day resolution rate</strong>, and maintaining <strong>zero critical system failures</strong> over 18 months. Beyond networking, I bring hands-on <strong>PC assembly and hardware troubleshooting</strong> experience and a reputation for patient, effective <strong>help desk</strong> support.</p>
 
 <p class="section-title">Career Objective</p>
 <p>Seeking a challenging position as a <strong>Network Engineer</strong> or <strong>IT Infrastructure Specialist</strong> where I can leverage my hands-on experience in enterprise network management, system administration, and technical support to contribute to organizational success.</p>
@@ -983,6 +1252,7 @@ strong { color: #0f172a; }
 <li>Provided daily <strong>help desk support</strong> with <strong>95%+ same-day resolution rate</strong>, maintaining user satisfaction score of <strong>4.8/5.0</strong></li>
 <li>Delivered <strong>technical preparation and live support</strong> for <strong>20+ conferences and events</strong> with zero technical failures</li>
 <li>Implemented <strong>network monitoring system</strong> that reduced downtime by <strong>40%</strong> and improved response time by <strong>60%</strong></li>
+<li>Act as <strong>first-line help desk</strong> for all departments — patient troubleshooting of desktops, printers, and network issues with a user-first attitude</li>
 </ul>
 
 <p><span class="exp-role">Digital Marketing Intern</span> &nbsp; <span class="exp-date">8-Month Internship</span></p>
@@ -1011,6 +1281,14 @@ strong { color: #0f172a; }
 <li><strong>Process Improvement:</strong> Implemented automated ticketing system, improving response time by <strong>60%</strong></li>
 </ul>
 
+<p class="section-title">Key Projects</p>
+<ul>
+<li><strong>Enterprise IT Infrastructure:</strong> Designed and deployed complete network infrastructure for 150+ users, including structured cabling, server room setup, and active directory configuration — reducing setup time by <strong>30%</strong></li>
+<li><strong>CCTV Surveillance System:</strong> Installed and configured <strong>120+ IP cameras</strong> across 5 buildings with centralized NVR monitoring, achieving <strong>100% coverage</strong> with <strong>99.9% uptime</strong></li>
+<li><strong>Event Technical Support:</strong> Provided live technical support for <strong>20+ corporate events</strong> and conferences, ensuring <strong>zero technical failures</strong> and receiving <strong>positive feedback from 98%</strong> of participants</li>
+<li><strong>PC Assembly & Hardware Maintenance:</strong> Assembled, upgraded, and repaired <strong>30+ workstations</strong> — component selection, assembly, OS deployment, and component-level hardware troubleshooting</li>
+</ul>
+
 <p class="section-title">References</p>
 <p><strong>Dr. Mahdi Zolfaghari</strong> — Director, Iran Language Institute</p>
 <p><strong>Dr. Asgari</strong> — Faculty Member, Islamic Azad University</p>
@@ -1018,22 +1296,7 @@ strong { color: #0f172a; }
 </tr>
 </table>
 </body>
-</html>`;
-
-                const blob = new Blob([wordHtml], { type: 'application/msword' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Amin_Saadati_CV.doc';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            } catch (err) {
-                console.error('Error generating Word:', err);
-                alert('Error generating Word document. Please try again.');
-            }
-        }
+</html>`; }
     </script>
 </body>
-</html>
+</html>
