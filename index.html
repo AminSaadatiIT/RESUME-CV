@@ -417,6 +417,9 @@
             display: block;
             margin: 0 auto 6px;
         }
+        /* Inline QR clone for Word export: svg data-URI (Word ignores page
+           SVG refs but renders data URIs) */
+        .word-qr { width: 110px; height: 110px; display: block; margin: 0 auto 4px; }
         .qr-caption {
             font-size: 10px;
             color: var(--gray);
@@ -633,6 +636,13 @@
             }
         }
 
+        /* Hide the fixed Portfolio button during PDF capture so it never
+           overlaps the name; also give the sidebar breathing room on desktop */
+        body.pdf-capturing .back-btn { display: none !important; }
+        @media (min-width: 769px) {
+            .sidebar { padding-top: 64px; }
+        }
+
         @media print {
             body { background: white; }
             .lang-toggle { display: none !important; }
@@ -650,6 +660,16 @@
         .pdf-export {
             page-break-inside: avoid;
             break-inside: avoid;
+            margin: 0 auto !important;
+            min-height: auto !important;
+            box-shadow: none !important;
+            max-width: 1100px !important;
+        }
+        /* While capturing, neutralize the gray page background so the PDF
+           never inherits it as a leading blank band */
+        body.pdf-capturing {
+            background: #ffffff !important;
+            padding: 0 !important;
         }
         .pdf-export .sidebar,
         .pdf-export .main {
@@ -760,7 +780,7 @@
             <!-- Portfolio QR — scan → live case studies -->
             <div class="sidebar-section">
                 <div class="qr-block">
-                    <img src="images/qr-portfolio.svg" alt="Scan to view my portfolio with engineering case studies" width="110" height="110">
+                    <img id="qrImg" src="images/qr-portfolio.svg" alt="Scan to view my portfolio with engineering case studies" width="110" height="110">
                     <div class="qr-caption" data-fa="برای مشاهده پورتفولیو و مطالعات موردی اسکن کنید">Scan for live case studies</div>
                     <div class="qr-caption"><a href="https://aminsaadatiit.github.io/portfolio/" target="_blank" rel="noopener">aminsaadatiit.github.io/portfolio</a></div>
                 </div>
@@ -1016,30 +1036,59 @@
         function downloadPDF() {
             const el = document.getElementById('cv-content');
             const btn = document.querySelector('.download-float');
+            const toggle = document.querySelector('.lang-toggle');
             btn.style.display = 'none';
-            
-            // Add print class to prevent page breaks
+            if (toggle) toggle.style.display = 'none';
+
+            // Fix for "blank first page": html2canvas captures the element
+            // relative to the viewport, so a scrolled page shifts the canvas.
+            // Scroll to top and give the page a clean white screen background.
+            const prevScroll = window.scrollY;
+            window.scrollTo(0, 0);
+            document.body.classList.add('pdf-capturing');
             el.classList.add('pdf-export');
-            
+
+            // html2canvas rasterizes inline SVG unreliably; use the PNG twin
+            // of the QR while capturing, then restore the vector version.
+            const qr = document.getElementById('qrImg');
+            let qrSwapped = false;
+            if (qr) {
+                qr.src = 'images/qr-portfolio.png';
+                qrSwapped = true;
+            }
+
             html2pdf().set({
                 margin: [10, 10, 10, 10],
                 filename: 'Amin_Saadati_CV.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 2, 
+                html2canvas: {
+                    scale: 2,
                     useCORS: true,
                     logging: false,
-                    letterRendering: true
+                    letterRendering: true,
+                    scrollY: -window.scrollY,
+                    backgroundColor: '#ffffff'
                 },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
                     orientation: 'portrait'
                 },
-                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-            }).from(el).save().then(() => { 
-                btn.style.display = 'block'; 
+                pagebreak: { mode: ['css', 'legacy'] }
+            }).from(el).save().then(() => {
+                if (qrSwapped && qr) qr.src = 'images/qr-portfolio.svg';
+                document.body.classList.remove('pdf-capturing');
                 el.classList.remove('pdf-export');
+                btn.style.display = 'block';
+                if (toggle) toggle.style.display = '';
+                window.scrollTo(0, prevScroll);
+            }).catch(() => {
+                if (qrSwapped && qr) qr.src = 'images/qr-portfolio.svg';
+                document.body.classList.remove('pdf-capturing');
+                el.classList.remove('pdf-export');
+                btn.style.display = 'block';
+                if (toggle) toggle.style.display = '';
+                window.scrollTo(0, prevScroll);
             });
         }
 
@@ -1103,6 +1152,12 @@ a { color: #2563eb; }
 <p class="title">متخصص شبکه و زیرساخت فناوری اطلاعات</p>
 <p class="contact">مشهد، ایران &bull; +98 999 971 8581 &bull; amin.saadati5195@gmail.com<br>
 <a href="https://github.com/AminSaadatiIT">گیت‌هاب</a> &bull; <a href="https://www.linkedin.com/in/amin-saadati-it/">لینکدین</a> &bull; <a href="https://aminsaadatiit.github.io/portfolio/">پورتفولیو</a></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;padding:6px;">
+<img class="word-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApQAAAKUCAIAAAA1rT9rAAANiklEQVR4nO3XW3IjORIAQeYa739lzAnWpkdQKxUs938ansUwzDnnBQB0/G97AgDAfyPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ894aeGa2huYPnXNye3Vzr27WW7zPW+e7tVdPu8989r3y8gaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAmPcr6JyzPYWMmcmNe3O+7sZnc7726pP+J294eQNAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAzPv1MDPzqjnnbE+BDzyjrW9ha6+ett4b/id/Py9vAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIh5b08AvtPMfPm355zXk+b8tPXCJ/HyBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoCY9/YE+EznnC//dmZWxr1xM+eirfVujbt1r+D/8fIGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgJj362HOOdtT4C+amUfdja31bu3V0853i736/by8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASDm/Qqame0p8BfP6JzzqLtRXO/W+W4prrf4LfDnvLwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIGbOOdtz4APNzPYUMm6+wa19ftr/xs0+P22v+Ble3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQM+ecnYFnvvzbrTkXbe1zcVx+v+L/1RZ79dlN8fIGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgJj362FmZmXcc87KnLfGLbrZqxvFfd7aqxvF76j4/RbnXOTlDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAxc87ZGXhmZdziem/mXNznrb268bTzvbF1RjeK3xGfzcsbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLmnLMz8MzKuDfrvZnz1j4Xz+iG8/1zvsGf4Tv67P/JLV7eABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAz55ztOfAvZia3Rzf36mnrLbo5o+Jeba1361sontHT7rOXNwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEvF9BM7M9hYxzzsq4TzujrfXenO/WnJ92N4puzsh/zs/w8gaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAmDnn7Aw88+XfFufMz5zv1hlt3ckbT/sGn3avnvZ/dYLf4A0vbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIeW8NfM758m9n5vWkOd+MW7S1VzfjFs/Xff79ivfqxtZ/+wT32csbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLmnLMz8MyXf1uc89MUz6g456e5OaPi3Sjaus/nYWfk5Q0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMe/tCTzFOedVMzMrv73Zq619vlnvjZv1Fue8Zes+b53Rja31zsPus5c3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMS8X0Ez83oS6/0Z55yV3xbdrPfmPhf3eev73Tqj4vlOsCle3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ834FnXNWxp2Z15P2amu9xTlv2Vrvzbhb32/xXm3NeeuMtpzger28ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASDm/XqYmfnyb885xv3lts6ouN6nfYNFW3ey+D+5ZetOenkDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQMycc7bnwAeamS//9uZO3ox7ozjnLU/bq+J/bPE7ehovbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIeW8NPDNbQ/OHzjkrv725Gzfj8jN8+z+zV8Vv4WnrveHlDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx71fQOWd7Chkz83qSm/Vu3aubcYvn+7T1Pu2/rjjnCf5veHkDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQMz79TAz86o552xP4RGKd2PrXj1tr248ba9u1rt1J0/wP9bLGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBi3tsTgO90zvnyb2dmZdwtN+stjnvDvfqZ8936Bif47Xt5A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0DMe3sC8J1m5su/Ped861z4fk87o5v7/DTzsG/fyxsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYt6vhznnbE+Bv3hGM7Py2+J6jcsnOcHv6IaXNwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEvF9BM7M9BT7wjM45ub3amvPNuFvrfdo+3yieUXGfb3h5A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0DMnHO25wAA/Ade3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeAPBq+QcZiyFM6FDZGQAAAABJRU5ErkJggg==" alt="Scan to view portfolio">
+<p style="text-align:center;font-size:7.5pt;color:#64748b;margin:0 0 6px 0;">Scan for live case studies &bull; aminsaadatiit.github.io/portfolio</p>
 </td>
 </tr>
 <tr>
@@ -1222,6 +1277,12 @@ strong { color: #0f172a; }
 <p class="title">Network & IT Infrastructure Specialist</p>
 <p class="contact">Mashhad, Iran &bull; +98 999 971 8581 &bull; amin.saadati5195@gmail.com<br>
 <a href="https://github.com/AminSaadatiIT">GitHub</a> &bull; <a href="https://www.linkedin.com/in/amin-saadati-it/">LinkedIn</a> &bull; <a href="https://aminsaadatiit.github.io/portfolio/">Portfolio</a></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;padding:6px;">
+<img class="word-qr" src="data:image/png;base64,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" alt="Scan to view portfolio">
+<p style="text-align:center;font-size:7.5pt;color:#64748b;margin:0 0 6px 0;">Scan for live case studies &bull; aminsaadatiit.github.io/portfolio</p>
 </td>
 </tr>
 <tr>
